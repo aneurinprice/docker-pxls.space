@@ -2,4 +2,10 @@
 
 set -eux
 
-mvn -version
+git clone https://github.com/pxlsspace/Pxls.git
+
+cd Pxls
+
+mvn clean package
+
+cat resources/reference.conf
