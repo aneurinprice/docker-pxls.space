@@ -9,4 +9,6 @@ cd /Pxls && echo "cd Successful"
 
 cp /config ./pxls.conf
 
+sed 's/@dbhost@/"$dbhost"/g'
+
 java -jar ./target/pxls-1.0-SNAPSHOT.jar
