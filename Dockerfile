@@ -7,7 +7,12 @@ RUN set -eux; \
     apt-get install -y --no-install-recommends \
 	ca-certificates \
 	git \
-	maven
+	maven; \
+	git clone https://github.com/pxlsspace/Pxls.git; \
+	cd Pxls; \
+	pwd; \
+	mvn clean package; \
+	ls -l
 
 COPY entrypoint /
 
