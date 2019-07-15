@@ -11,8 +11,7 @@ RUN set -eux; \
 	git clone https://github.com/pxlsspace/Pxls.git; \
 	cd Pxls; \
 	pwd; \
-	mvn clean package; \
-	ls -l
+	mvn clean package
 
 COPY entrypoint /
 

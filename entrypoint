@@ -7,13 +7,6 @@ chmod 775 /Pxls -R
 
 cd /Pxls && echo "cd Successful"
 
-conf=/config/pxls.conf
-
-if [ -f "$conf" ]; then
-	cp "$conf" ./pxls.conf && echo "Custom Config Loaded"
-else 
-	echo "No Custom Config Found, Using Shipped Version - This will fail"
-	cp ./resources/reference.conf ./pxls.conf
-fi
+cp /config ./pxls.conf
 
 java -jar ./target/pxls-1.0-SNAPSHOT.jar
