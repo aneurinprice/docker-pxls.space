@@ -10,5 +10,10 @@ cd /Pxls && echo "cd Successful"
 cp /config ./pxls.conf
 
 sed 's/@dbhost@/"$dbhost"/g'
+sed 's/@dbport@/"$dbport"/g'
+sed 's/@dbuser@/"$dbuser"/g'
+sed 's/@dbpass@/"$dbpass"/g'
+sed 's/@dbname@/"$dbname"/g'
+
 
 java -jar ./target/pxls-1.0-SNAPSHOT.jar
