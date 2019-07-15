@@ -16,9 +16,10 @@ RUN set -eux; \
 ENV dbhost="pxlsdb"
 ENV dbport="3306"
 ENV dbuser="pxlsadmin"
-ENV dbpass="YOU MUST SET THIS"
+ENV dbpass="YOU MUST SET THIS YOURSELF"
 ENV dbname="pxls"
 ENV ipaddress="127.0.0.1"
+ENV useip="false"
 
 COPY entrypoint /
 COPY resources/reference.conf /pxls.conf
