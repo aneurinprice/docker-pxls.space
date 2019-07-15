@@ -1,12 +1,5 @@
 FROM debian:buster-slim
 
-ENV dbhost="pxlsdb"
-ENV dbport="3306"
-ENV dbuser="pxlsadmin"
-ENV dbpass="YOU MUST SET THIS"
-ENV dbname="pxls"
-ENV ipaddress="127.0.0.1"
-
 RUN set -eux; \
     mkdir -p /usr/share/man/man1; \
     export DEBIAN_FRONTEND=noninteractive; \
@@ -19,6 +12,13 @@ RUN set -eux; \
 	cd Pxls; \
 	pwd; \
 	mvn clean package
+
+ENV dbhost="pxlsdb"
+ENV dbport="3306"
+ENV dbuser="pxlsadmin"
+ENV dbpass="YOU MUST SET THIS"
+ENV dbname="pxls"
+ENV ipaddress="127.0.0.1"
 
 COPY entrypoint /
 COPY resources/reference.conf /pxls.conf
