@@ -13,9 +13,9 @@ RUN set -eux; \
 	pwd; \
 	mvn clean package
 
-ENV dbhost="pxlsdb"
+ENV dbhost="pxls-mysql"
 ENV dbport="3306"
-ENV dbuser="pxlsadmin"
+ENV dbuser="pxls"
 ENV dbpass="YOU MUST SET THIS"
 ENV dbname="pxls"
 ENV ipaddress="127.0.0.1"
