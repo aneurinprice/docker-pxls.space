@@ -20,7 +20,8 @@ sed -i "s|@dbport@|$dbport|g" ./pxls.conf
 sed -i "s|@dbuser@|$dbuser|g" ./pxls.conf
 sed -i "s|@dbpass@|${dbpass}|g" ./pxls.conf
 sed -i "s|@dbname@|$dbname|g" ./pxls.conf
-sed -i "s|@apaddress@|$ipaddress|g" ./pxls.conf
+sed -i "s|@ipaddress@|$ipaddress|g" ./pxls.conf
+sed -i "s|@useip@|$useip|g" ./pxls.conf
 
 cat ./pxls.conf
 
