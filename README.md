@@ -11,13 +11,13 @@ Is based on 'debian:buster-slim'
 Accepts http conntection or port 4567
 
 Environment Variables and Default Values:
-  - dbhost (pxlsdb)
+  - dbhost (pxls-mysql)
   - dbport (3306)
-  - dbuser (pxlsadmin)
+  - dbuser (pxls)
   - dbpass (YOU MUST SET THIS YOURSELF)
   - dbname (pxls)
   - ipaddress (127.0.0.1)
-  - useip (falase)
+  - useip (false)
 
 Custom Config:
   - Please make an issue for any changes to the way configuration is handled.
