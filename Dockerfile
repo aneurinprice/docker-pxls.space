@@ -1,16 +1,10 @@
 FROM debian:buster-slim
 
-ARG dbhost="pxlsdb"
-ARG dbport="3306"
-ARG dbuser="pxlsadmin"
-ARG dbpass="YOU MUST SET THIS"
-ARG dbname="pxls"
-
-ENV dbhost="$dbhost"
-ENV dbport="$dbport"
-ENV dbuser="$dbuser"
-ENV dbpass="$dbpass"
-ENV dbname="$dbname"
+ENV dbhost="pxlsdb"
+ENV dbport="3306"
+ENV dbuser="pxlsadmin"
+ENV dbpass="YOU MUST SET THIS"
+ENV dbname="pxls"
 
 RUN set -eux; \
     mkdir -p /usr/share/man/man1; \
@@ -26,5 +20,6 @@ RUN set -eux; \
 	mvn clean package
 
 COPY entrypoint /
+COPY resources/reference.conf /pxls.conf
 
-ENTRYPOINT [ "/entrypoint" ]
+CMD [ "/bin/bash", "-c", "/entrypoint" ]
