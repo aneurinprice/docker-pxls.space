@@ -11,13 +11,29 @@ Is based on 'debian:buster-slim'
 Accepts http conntection or port 4567
 
 Environment Variables and Default Values:
-  - dbhost (pxls-mysql)
-  - dbport (3306)
-  - dbuser (pxls)
-  - dbpass (YOU MUST SET THIS YOURSELF)
-  - dbname (pxls)
-  - ipaddress (127.0.0.1)
-  - useip (false)
+
+Database Options:
+  - dbhost 		(pxls-mysql)
+  - dbport 		(3306)
+  - dbuser 		(pxls)
+  - dbpass 		(YOU MUST SET THIS YOURSELF)
+  - dbname 		(pxls)
+
+Auth Options:
+  - useip 		(false)
+  - reddit-key 		(null)
+  - reddit-secret 	(null)
+  - google-key 		(null)
+  - google-secret 	(null)  
+  - discord-key 	(null)
+  - discord-secret	(null)
+  - vk-key		(null)
+  - vk-secret		(null)
+  - tumblr-key		(null)
+  - tumblr-secret	(null)
+
+MISC Options:
+  - ipaddress 		(127.0.0.1)
 
 Custom Config:
   - Please make an issue for any changes to the way configuration is handled.

@@ -19,7 +19,18 @@ ENV dbuser="pxls"
 ENV dbpass="YOU MUST SET THIS YOURSELF"
 ENV dbname="pxls"
 ENV ipaddress="127.0.0.1"
-ENV useip="false"
+ENV callBackbase=""
+ENV reddit-key=""
+ENV reddit-secret="false"
+ENV google-key=""
+ENV google-secret="false"
+ENV discord-key=""
+ENV discord-secret="false"
+ENV vk-key=""
+ENV vk-secret="false"
+ENV tumblr-key=""
+ENV tumblr-secret="false"
+
 
 COPY entrypoint /
 COPY resources/reference.conf /pxls.conf
