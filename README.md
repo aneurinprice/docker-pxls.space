@@ -21,16 +21,17 @@ Database Options:
 
 Auth Options:
   - useip 		(false)
-  - reddit-key 		(null)
-  - reddit-secret 	(null)
-  - google-key 		(null)
-  - google-secret 	(null)  
-  - discord-key 	(null)
-  - discord-secret	(null)
-  - vk-key		(null)
-  - vk-secret		(null)
-  - tumblr-key		(null)
-  - tumblr-secret	(null)
+  - callbackBase 	(false)
+  - reddit-key 		(false)
+  - reddit-secret 	(false)
+  - google-key 		(false)
+  - google-secret 	(false)  
+  - discord-key 	(false)
+  - discord-secret	(false)
+  - vk-key		(false)
+  - vk-secret		(false)
+  - tumblr-key		(false)
+  - tumblr-secret	(false)
 
 MISC Options:
   - ipaddress 		(127.0.0.1)

@@ -19,9 +19,12 @@ sed -i "s|@dbname@|$dbname|g" ./pxls.conf
 sed -i "s|@ipaddress@|$ipaddress|g" ./pxls.conf
 
 ## Authentication Config ##
-sed -i "s|@useip@|$useip|g" ./pxls.conf
-sed -i "s|@reddit-key@|$reddit-key|g" ./pxls.conf
-sed -i "s|@reddit-secret@|$secret-key|g" ./pxls.conf
+
+authenticators=( 'useip' 'callbackBase' 'redditkey' 'redditsecret' 'googlekey' 'googlesecret' 'discordkey' 'discordsecret' 'vkkey' 'vksecret' 'tumblrkey' 'tumblrsecret')
+
+for i in "${authenticators[@]}"; do
+	sed -i "s|@$i@|${!i}|g" ./pxls.conf
+done
 
 cat ./pxls.conf
 
