@@ -2,6 +2,7 @@
 
 ## Auto-Mirrored from Gitlab -> Github ->  Dockerhub ##
 
+## Please make Pull/Merge Requests on my Gitlab, Issues can be raised anywhere ##
 
 ### Available on my [Gitlab](https://gitlab.nyeprice.space/moby/docker-pxls.space) ###
 
@@ -17,7 +18,7 @@
 
 Is based on _debian:buster-slim_
 
-Accepts http conntection or port 4567
+Accepts http conntections on port 4567
 
 Environment Variables and Default Values:
 
