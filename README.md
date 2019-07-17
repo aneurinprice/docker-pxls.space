@@ -1,4 +1,4 @@
-WARNING: THIS IS WORK IN PROGRESS
+WORK IN PROGRESS BUT PRETTY MUCH STABLE
 
 Available on Dockerhub: https://hub.docker.com/r/m08y/docker-pxls.space
 
