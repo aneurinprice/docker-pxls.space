@@ -11,11 +11,11 @@
 
 
 ## Current Issues: ##
-  - Passwords and strings *MUST* be consloed in single quotes 'dsfhl$f'.
+  - Passwords and strings _MUST_ be consloed in single quotes 'dsfhl$f'.
   - Certain characters not working in strings, \t is the only known instance.
   - Is hard coded to use mariadb/mysql - Will fix later although mariadb/mysql is recommended.
 
-Is based on 'debian:buster-slim'
+Is based on _debian:buster-slim_
 
 Accepts http conntection or port 4567
 
