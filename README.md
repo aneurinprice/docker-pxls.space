@@ -3,8 +3,9 @@ WARNING: THIS IS WORK IN PROGRESS
 Available on Dockerhub: https://hub.docker.com/r/m08y/docker-pxls.space
 
 Current Issues:
-  - Passwords and strings in general cannot contain certain characters (\ / ' ") - Will fix soon
-  - Is hard coded to use mariadb/mysql - Will fix later although mariadb/mysql is reccomended
+  - Passwords and strings MUST be consloed in single quotes ''.
+  - Certain characters not working in strings, \t is the only known instance.
+  - Is hard coded to use mariadb/mysql - Will fix later although mariadb/mysql is reccomended.
 
 Is based on 'debian:buster-slim'
 
