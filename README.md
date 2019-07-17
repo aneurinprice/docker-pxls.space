@@ -3,7 +3,7 @@ WARNING: THIS IS WORK IN PROGRESS
 Available on Dockerhub: https://hub.docker.com/r/m08y/docker-pxls.space
 
 Current Issues:
-  - Passwords and strings MUST be consloed in single quotes ''.
+  - Passwords and strings MUST be consloed in single quotes 'dsfhl$f'.
   - Certain characters not working in strings, \t is the only known instance.
   - Is hard coded to use mariadb/mysql - Will fix later although mariadb/mysql is reccomended.
 
