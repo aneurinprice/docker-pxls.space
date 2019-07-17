@@ -49,5 +49,5 @@ ipaddress 	|	(127.0.0.1)
 
 
 ## Example command: ##
-  - docker run -v $(pwd):/config -p 4567:4567 -e dbhost=pxldbhost -e dbuser=pxls -e dbpass=th!515aPas6W0rD -e dbname=pxls registry.nyeprice.space/moby/docker-pxls.space
+  - docker run -p 4567:4567 -e dbhost=pxls-mysql -e dbuser=pxls -e dbpass='an3x@mpl3' -e dbname=pxls -e useip='true' m08y/docker-pxls.space
  
