@@ -1,20 +1,19 @@
-WORK IN PROGRESS BUT PRETTY MUCH STABLE
+# WORK IN PROGRESS BUT PRETTY MUCH STABLE #
 
-Auto-Mirrored from Gitlab -> Github ->  Dockerhub.
-
-
-
-Available on my Gitlab: https://gitlab.nyeprice.space/moby/docker-pxls.space
-
-Available on Github:    https://github.com/aneurinprice/docker-pxls.space
-
-Available on Dockerhub: https://hub.docker.com/r/m08y/docker-pxls.space
+## Auto-Mirrored from Gitlab -> Github ->  Dockerhub ##
 
 
-Current Issues:
-  - Passwords and strings MUST be consloed in single quotes 'dsfhl$f'.
+### Available on my [Gitlab](https://gitlab.nyeprice.space/moby/docker-pxls.space) ###
+
+### Available on [Github](https://github.com/aneurinprice/docker-pxls.space) ###
+
+### Available on [Dockerhub](https://hub.docker.com/r/m08y/docker-pxls.space) ###
+
+
+## Current Issues: ##
+  - Passwords and strings *MUST* be consloed in single quotes 'dsfhl$f'.
   - Certain characters not working in strings, \t is the only known instance.
-  - Is hard coded to use mariadb/mysql - Will fix later although mariadb/mysql is reccomended.
+  - Is hard coded to use mariadb/mysql - Will fix later although mariadb/mysql is recommended.
 
 Is based on 'debian:buster-slim'
 
@@ -22,31 +21,28 @@ Accepts http conntection or port 4567
 
 Environment Variables and Default Values:
 
-Database Options:
-  - dbhost 		(pxls-mysql)
-  - dbport 		(3306)
-  - dbuser 		(pxls)
-  - dbpass 		(YOU MUST SET THIS YOURSELF)
-  - dbname 		(pxls)
+Variable	|	Default Value
+----------------|--------------------
+dbhost 		|	(pxls-mysql)
+dbport 		|	(3306)
+dbuser 		|	(pxls)
+dbpass 		|	(YOU MUST SET THIS YOURSELF)
+dbname 		|	(pxls)
+useip 		|	(false)
+callbackBase 	|	(false)
+reddit-key 	|	(false)
+reddit-secret 	|	(false)
+google-key 	|	(false)
+google-secret 	|	(false)  
+discord-key 	|	(false)
+discord-secret	|	(false)
+vk-key		|	(false)
+vk-secret	|	(false)
+tumblr-key	|	(false)
+tumblr-secret	|	(false)
+ipaddress 	|	(127.0.0.1)
 
-Auth Options:
-  - useip 		(false)
-  - callbackBase 	(false)
-  - reddit-key 		(false)
-  - reddit-secret 	(false)
-  - google-key 		(false)
-  - google-secret 	(false)  
-  - discord-key 	(false)
-  - discord-secret	(false)
-  - vk-key		(false)
-  - vk-secret		(false)
-  - tumblr-key		(false)
-  - tumblr-secret	(false)
-
-MISC Options:
-  - ipaddress 		(127.0.0.1)
-
-Custom Config:
+##Custom Config:##
   - Please make an issue for any changes to the way configuration is handled.
   - Config can be mounted to /pxls.conf and will be pulled into the app  
 
