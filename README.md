@@ -42,11 +42,11 @@ tumblr-key	|	(false)
 tumblr-secret	|	(false)
 ipaddress 	|	(127.0.0.1)
 
-##Custom Config:##
+## Custom Config: ##
   - Please make an issue for any changes to the way configuration is handled.
   - Config can be mounted to /pxls.conf and will be pulled into the app  
 
 
-Example command:
+## Example command: ##
   - docker run -v $(pwd):/config -p 4567:4567 -e dbhost=pxldbhost -e dbuser=pxls -e dbpass=th!515aPas6W0rD -e dbname=pxls registry.nyeprice.space/moby/docker-pxls.space
  
