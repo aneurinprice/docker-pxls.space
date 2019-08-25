@@ -33,7 +33,7 @@ dbuser            | pxls
 dbpass            | YOU MUST SET THIS YOURSELF
 dbname            | pxls
 authuseip         | false
-authcallbackbase  | http://localhost:3306/auth
+authcallbackbase  | http://localhost:4567/auth
 authredditkey     | 
 authredditsecret  | 
 authgooglekey     | 
