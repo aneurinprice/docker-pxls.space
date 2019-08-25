@@ -9,20 +9,33 @@ cd /Pxls && echo "cd Successful"
 
 cp /pxls.conf ./pxls.conf
 
-## Database Config ##
-sed -i "s|@dbhost@|$dbhost|g" ./pxls.conf
-sed -i "s|@dbport@|$dbport|g" ./pxls.conf
-sed -i "s|@dbuser@|$dbuser|g" ./pxls.conf
-sed -i "s|@dbpass@|$dbpass|g" ./pxls.conf
-sed -i "s|@dbname@|$dbname|g" ./pxls.conf
+## Environment Config ##
+vars=(
+	'canvascode'
+	'pagetitle'
+	'ipaddress'
 
-sed -i "s|@ipaddress@|$ipaddress|g" ./pxls.conf
+	'dbuser'
+	'dbpass'
+	'dbname'
+	'dbhost'
+	'dbport'
 
-## Authentication Config ##
+	'authuseip'
+	'authcallbackbase'
+	'authredditkey'
+	'authredditsecret'
+	'authgooglekey'
+	'authgooglesecret'
+	'authdiscordkey'
+	'authdiscordsecret'
+	'authvkkey'
+	'authvksecret'
+	'authtumblrkey'
+	'authtumblrsecret'
+)
 
-authenticators=( 'useip' 'callbackBase' 'redditkey' 'redditsecret' 'googlekey' 'googlesecret' 'discordkey' 'discordsecret' 'vkkey' 'vksecret' 'tumblrkey' 'tumblrsecret')
-
-for i in "${authenticators[@]}"; do
+for i in "${vars[@]}"; do
 	sed -i "s|@$i@|${!i}|g" ./pxls.conf
 done
 
