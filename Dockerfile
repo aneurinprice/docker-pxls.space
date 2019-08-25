@@ -16,6 +16,7 @@ RUN set -eux; \
 ENV canvascode="1"
 ENV pagetitle="Pxls"
 ENV ipaddress="127.0.0.1"
+ENV host="localhost"
 ENV dbhost="pxls-mysql"
 ENV dbport="3306"
 ENV dbuser="pxls"

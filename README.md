@@ -27,6 +27,7 @@ Variable	  |	Default Value
 canvascode        | 1
 pagetitle         | Pxls
 ipaddress         | 127.0.0.1
+host              | localhost
 dbhost            | pxls-mysql
 dbport            | 3306
 dbuser            | pxls
