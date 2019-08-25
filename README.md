@@ -27,11 +27,11 @@ Variable	  |	Default Value
 canvascode        | 1
 pagetitle         | Pxls
 ipaddress         | 127.0.0.1
-dbhost 	          | pxls-mysql
-dbport 	          | 3306
-dbuser 	          | pxls
-dbpass 	          | YOU MUST SET THIS YOURSELF
-dbname 	          | pxls
+dbhost            | pxls-mysql
+dbport            | 3306
+dbuser            | pxls
+dbpass            | YOU MUST SET THIS YOURSELF
+dbname            | pxls
 authuseip         | false
 authcallbackbase  | http://localhost:3306/auth
 authredditkey     | 
