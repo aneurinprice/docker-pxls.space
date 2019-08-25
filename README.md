@@ -24,24 +24,26 @@ Environment Variables and Default Values:
 
 Variable	|	Default Value
 ----------------|--------------------
-dbhost 		|	(pxls-mysql)
-dbport 		|	(3306)
-dbuser 		|	(pxls)
-dbpass 		|	(YOU MUST SET THIS YOURSELF)
-dbname 		|	(pxls)
-useip 		|	(false)
-callbackBase 	|	(false)
-reddit-key 	|	(false)
-reddit-secret 	|	(false)
-google-key 	|	(false)
-google-secret 	|	(false)  
-discord-key 	|	(false)
-discord-secret	|	(false)
-vk-key		|	(false)
-vk-secret	|	(false)
-tumblr-key	|	(false)
-tumblr-secret	|	(false)
-ipaddress 	|	(127.0.0.1)
+canvascode 	|	1
+pagetitle 	|	Pxls
+ipaddress 	|	127.0.0.1
+dbhost 		|	pxls-mysql
+dbport 		|	3306
+dbuser 		|	pxls
+dbpass 		|	YOU MUST SET THIS YOURSELF
+dbname 		|	pxls
+authuseip 		|	false
+authcallbackbase 	|	http://localhost:3306/auth
+authredditkey 	|	
+authredditsecret 	|	
+authgooglekey 	|	
+authgooglesecret 	|	 
+authdiscordkey 	|	
+authdiscordsecret	| 
+authvkkey		|	
+authvksecret	|	
+authtumblrkey	|	
+authtumblrsecret	| 
 
 ## Custom Config: ##
   - Please make an issue for any changes to the way configuration is handled.
