@@ -22,26 +22,29 @@ Accepts http conntections on port 4567
 
 Environment Variables and Default Values:
 
-Variable	|	Default Value
-----------------|--------------------
-dbhost 		|	(pxls-mysql)
-dbport 		|	(3306)
-dbuser 		|	(pxls)
-dbpass 		|	(YOU MUST SET THIS YOURSELF)
-dbname 		|	(pxls)
-useip 		|	(false)
-callbackBase 	|	(false)
-reddit-key 	|	(false)
-reddit-secret 	|	(false)
-google-key 	|	(false)
-google-secret 	|	(false)  
-discord-key 	|	(false)
-discord-secret	|	(false)
-vk-key		|	(false)
-vk-secret	|	(false)
-tumblr-key	|	(false)
-tumblr-secret	|	(false)
-ipaddress 	|	(127.0.0.1)
+Variable	  |	Default Value
+------------------|------------------
+canvascode        | 1
+pagetitle         | Pxls
+ipaddress         | 127.0.0.1
+host              | localhost
+dbhost            | pxls-mysql
+dbport            | 3306
+dbuser            | pxls
+dbpass            | YOU MUST SET THIS YOURSELF
+dbname            | pxls
+authuseip         | false
+authcallbackbase  | http://localhost:4567/auth
+authredditkey     | 
+authredditsecret  | 
+authgooglekey     | 
+authgooglesecret  | 
+authdiscordkey    | 
+authdiscordsecret | 
+authvkkey         | 
+authvksecret      | 
+authtumblrkey     | 
+authtumblrsecret  | 
 
 ## Custom Config: ##
   - Please make an issue for any changes to the way configuration is handled.
@@ -49,5 +52,5 @@ ipaddress 	|	(127.0.0.1)
 
 
 ## Example command: ##
-  - docker run -p 4567:4567 -e dbhost=pxls-mysql -e dbuser=pxls -e dbpass='an3x@mpl3' -e dbname=pxls -e useip='true' m08y/docker-pxls.space
+  - docker run -p 4567:4567 -e dbhost=pxls-mysql -e dbuser=pxls -e dbpass='an3x@mpl3' -e dbname=pxls -e authuseip='true' m08y/docker-pxls.space
  
