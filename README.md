@@ -4,7 +4,7 @@
 
 ## Please make Pull/Merge Requests on my Gitlab, Issues can be raised anywhere ##
 
-### Available on my [Gitlab](https://gitlab.nyeprice.space/moby/docker-pxls.space) ###
+### Available on my [Gitlab](https://gitlab.nyeprice.space/moby/docker-pxls-space) ###
 
 ### Available on [Github](https://github.com/aneurinprice/docker-pxls.space) ###
 

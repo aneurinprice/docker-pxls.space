@@ -1,5 +1,7 @@
 FROM debian:buster-slim
 
+LABEL maintainer="Aneurin Price adp@nyeprice.space"
+
 RUN set -eux; \
     mkdir -p /usr/share/man/man1; \
     export DEBIAN_FRONTEND=noninteractive; \
