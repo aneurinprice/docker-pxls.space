@@ -12,9 +12,8 @@
 
 
 ## Current Issues: ##
-  - Passwords and strings _MUST_ be consloed in single quotes 'dsfhl$f'.
+  - Passwords and strings _MUST_ be consoled in single quotes 'dsfhl$f'.
   - Certain characters not working in strings, \t is the only known instance.
-  - Is hard coded to use mariadb/mysql - Will fix later although mariadb/mysql is recommended.
 
 Is based on _debian:buster-slim_
 
@@ -28,7 +27,7 @@ canvascode        | 1
 pagetitle         | Pxls
 ipaddress         | 127.0.0.1
 host              | localhost
-dbhost            | pxls-mysql
+dbhost            | pxls-postgres
 dbport            | 3306
 dbuser            | pxls
 dbpass            | YOU MUST SET THIS YOURSELF

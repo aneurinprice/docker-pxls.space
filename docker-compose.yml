@@ -6,15 +6,14 @@ services:
     ports:
       - "80:4567/tcp"
     environment:
-      dbhost: pxls-mysql
+      dbhost: pxls-postgres
       dbuser: pxls
-      dbpass: YOU MUST SET THIS YOURSELF 
+      dbpass: pxls
       dbname: pxls
       useip: "true"
-  pxls-mysql:    
-    image: mariadb
+  pxls-postgres:    
+    image: postgres
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_USER: pxls
-      MYSQL_PASSWORD: YOU MUST SET THIS YOURSELF
-      MYSQL_DATABASE: pxls
+      POSTGRES_USER: pxls
+      POSTGRES_PASSWORD: pxls
+      POSTGRES_DATABASE: pxls
