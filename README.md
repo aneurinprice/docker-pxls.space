@@ -51,5 +51,9 @@ authtumblrsecret  |
 
 
 ## Example command: ##
-  - docker run -p 4567:4567 -e dbhost=pxls-mysql -e dbuser=pxls -e dbpass='an3x@mpl3' -e dbname=pxls -e authuseip='true' m08y/docker-pxls.space
- 
+  - `docker run -p 4567:4567 -e dbhost=pxls-postgres -e dbuser=pxls -e dbpass='an3x@mpl3' -e dbname=pxls -e authuseip='true' m08y/docker-pxls.space`
+
+You can optionally add `-i` before the image name to keep STDIN open and run commands:
+  - `docker run -p 4567:4567 -e dbhost=pxls-postgres -e dbuser=pxls -e dbpass='an3x@mpl3' -e dbname=pxls -e authuseip='true' -i m08y/docker-pxls.space`
+  - (wait for instance to start, then create an account)
+  - `role (your_username) admin`

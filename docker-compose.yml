@@ -10,7 +10,7 @@ services:
       dbuser: pxls
       dbpass: pxls
       dbname: pxls
-      useip: "true"
+      authuseip: "true"
   pxls-postgres:    
     image: postgres
     environment:
