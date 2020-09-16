@@ -1,0 +1,4 @@
+[submodule "Pxls"]
+	path = Pxls
+	url = https://github.com/pxlsspace/Pxls.git
+	branch = master
