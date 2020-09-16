@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -eux
+
+# Testing, avoid all permission issues
+chmod 775 /Pxls -R
+
+cd /Pxls && echo "cd Successful"
+
+cp /pxls.conf ./pxls.conf
+
+## Environment Config ##
+vars=(
+	'canvascode'
+	'pagetitle'
+	'ipaddress'
+	'host'
+
+	'dbuser'
+	'dbpass'
+	'dbname'
+	'dbhost'
+	'dbport'
+
+	'authuseip'
+	'authcallbackbase'
+	'authredditkey'
+	'authredditsecret'
+	'authgooglekey'
+	'authgooglesecret'
+	'authdiscordkey'
+	'authdiscordsecret'
+	'authvkkey'
+	'authvksecret'
+	'authtumblrkey'
+	'authtumblrsecret'
+)
+
+for i in "${vars[@]}"; do
+	sed -i "s|@$i@|${!i}|g" ./pxls.conf
+done
+
+cat ./pxls.conf
+
+java -jar ./target/pxls-1.0-SNAPSHOT.jar
