@@ -5,6 +5,7 @@ build:
   tags:
     - docker
   stage: build
+  GIT_SUBMODULE_STRATEGY: recursive
   image:
     name: docker:dind
     entrypoint: [""]
