@@ -1,6 +1,6 @@
 # WORK IN PROGRESS BUT PRETTY MUCH STABLE #
 
-## Auto-Mirrored from Gitlab -> Github ->  Dockerhub ##
+## Auto-Mirrored from Gitlab -> Github ->  My Registry ##
 
 ## Please make Pull/Merge Requests on my Gitlab, Issues can be raised anywhere ##
 
@@ -8,15 +8,15 @@
 
 ### Available on [Github](https://github.com/aneurinprice/docker-pxls.space) ###
 
-### Available on [Dockerhub](https://hub.docker.com/r/m08y/docker-pxls.space) ###
+### Available on [My Registry](https://registry.nyeprice.space) ###
 
 
 ## Current Issues: ##
   - Passwords and strings _MUST_ be consloed in single quotes 'dsfhl$f'.
   - Certain characters not working in strings, \t is the only known instance.
-  - Is hard coded to use mariadb/mysql - Will fix later although mariadb/mysql is recommended.
+  - Is hard coded to use mariadb/mysql - Will (Probably not) fix later although mariadb/mysql is recommended.
 
-Is based on _debian:buster-slim_
+Is based on _maven:latest_
 
 Accepts http conntections on port 4567
 
@@ -52,5 +52,5 @@ authtumblrsecret  |
 
 
 ## Example command: ##
-  - docker run -p 4567:4567 -e dbhost=pxls-mysql -e dbuser=pxls -e dbpass='an3x@mpl3' -e dbname=pxls -e authuseip='true' m08y/docker-pxls.space
+  - `docker run -p 4567:4567 -e dbhost=pxls-mysql -e dbuser=pxls -e dbpass='an3x@mpl3' -e dbname=pxls -e authuseip='true' registry.nyeprice.space/docker-pxls.space/docker-pxls.space:latest`
  
