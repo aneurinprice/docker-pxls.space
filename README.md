@@ -13,7 +13,7 @@
 
 
 ## Current Issues: ##
-  - Passwords and strings _MUST_ be consloed in single quotes 'dsfhl$f'.
+  - Passwords and strings _MUST_ be surrounded in single quotes 'dsfhl$f'.
   - Certain characters not working in strings, \t is the only known instance.
   - Is hard coded to use mariadb/mysql - Will (Probably not) fix later although mariadb/mysql is recommended.
 
