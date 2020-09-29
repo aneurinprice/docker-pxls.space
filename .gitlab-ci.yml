@@ -15,10 +15,21 @@ build:
     - apk add git
     - git submodule update --recursive --remote
   script:
-    - docker login --username ${CI_REGISTRY_USER} --password ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    # CD into Project dir
     - cd ${CI_PROJECT_DIR}
+    # Build Image
     - docker build -t ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA} .
+
+    # Tag for My Regsitry
     - docker tag ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA} ${CI_REGISTRY}/${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
     - docker tag ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA} ${CI_REGISTRY}/${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:latest
+    # Tag for Dockerhub
+    - docker tag ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA} ${DOCKERHUB_USER}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
+    - docker tag ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA} ${DOCKERHUB_USER}/${CI_PROJECT_NAME}:latest
+    # Push to my registry
+    - docker login --username ${CI_REGISTRY_USER} --password ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - docker push ${CI_REGISTRY}/${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
     - docker push ${CI_REGISTRY}/${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:latest
+    # Push to Dockerhub
+    - docker login --username ${DOCKERHUB_USER} --password ${CI_REGISTRY_PASSWORD}
+    - docker push ${DOCKERHUB_USER}/${CI_PROJECT_NAME}:latest
