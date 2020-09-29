@@ -12,6 +12,7 @@ build:
     name: docker:dind
     entrypoint: [""]
   before_script:
+    - apk add git
     - git submodule update --recursive --remote
   script:
     - docker login --username ${CI_REGISTRY_USER} --password ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
