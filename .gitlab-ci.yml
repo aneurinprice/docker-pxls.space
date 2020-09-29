@@ -32,4 +32,5 @@ build:
     - docker push ${CI_REGISTRY}/${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:latest
     # Push to Dockerhub
     - docker login --username ${DOCKERHUB_USER} --password ${CI_REGISTRY_PASSWORD}
+    - docker push ${DOCKERHUB_USER}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
     - docker push ${DOCKERHUB_USER}/${CI_PROJECT_NAME}:latest
