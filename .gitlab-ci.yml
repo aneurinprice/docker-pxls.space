@@ -11,6 +11,8 @@ build:
   image:
     name: docker:dind
     entrypoint: [""]
+  before_script:
+    - git submodule update --recursive --remote
   script:
     - docker login --username ${CI_REGISTRY_USER} --password ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - cd ${CI_PROJECT_DIR}
