@@ -1,36 +1,31 @@
-FROM maven:latest
+FROM maven:latest as pxls-build
 
 LABEL maintainer="Aneurin Price adp@nyeprice.space"
-
-COPY Pxls/* ./
+COPY Pxls/ /pxls
 
 RUN set -eux; \
+	cd /pxls;\
 	mvn clean package
 
-ENV canvascode="1"
-ENV pagetitle="Pxls"
-ENV ipaddress="127.0.0.1"
-ENV host="localhost"
-ENV dbhost="pxls-mysql"
-ENV dbport="3306"
-ENV dbuser="pxls"
-ENV dbpass="YOU MUST SET THIS YOURSELF"
-ENV dbname="pxls"
-ENV authuseip="false"
-ENV authcallbackbase="http://localhost:4567/auth"
-ENV authredditkey=""
-ENV authredditsecret=""
-ENV authgooglekey=""
-ENV authgooglesecret=""
-ENV authdiscordkey=""
-ENV authdiscordsecret=""
-ENV authvkkey=""
-ENV authvksecret=""
-ENV authtumblrkey=""
-ENV authtumblrsecret=""
 
 
-COPY entrypoint /
-COPY resources/reference.conf /pxls.conf
-
-CMD [ "/bin/bash", "-c", "/entrypoint" ]
+FROM alpine:3.12.0
+LABEL maintainer="Aneurin Price adp@nyeprice.space"
+RUN set -eux; \
+	apk add --no-cache\
+		bash\
+		openjdk14 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing;\
+	addgroup \
+		pxls; \
+	adduser \
+    		--disabled-password \
+    		--gecos "" \
+    		--home /home/pxls \
+    		--ingroup pxls \
+    		--uid 6969 \
+    		pxls
+USER pxls
+WORKDIR /home/pxls
+COPY --chown=pxls --from=pxls-build /pxls ./
+COPY entrypoint.d/ /entrypoint.d
+ENTRYPOINT [ "/bin/run-parts", "--exit-on-error", "/entrypoint.d" ]

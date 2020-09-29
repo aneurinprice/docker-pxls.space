@@ -13,45 +13,15 @@
 
 
 ## Current Issues: ##
-  - Passwords and strings _MUST_ be surrounded in single quotes 'dsfhl$f'.
-  - Certain characters not working in strings, \t is the only known instance.
-  - Is hard coded to use mariadb/mysql - Will (Probably not) fix later although mariadb/mysql is recommended.
 
-Is based on _maven:latest_
+Is based on _alpine:3.12.0_
 
 Accepts http conntections on port 4567
 
-Environment Variables and Default Values:
-
-Variable	  |	Default Value
-------------------|------------------
-canvascode        | 1
-pagetitle         | Pxls
-ipaddress         | 127.0.0.1
-host              | localhost
-dbhost            | pxls-mysql
-dbport            | 3306
-dbuser            | pxls
-dbpass            | YOU MUST SET THIS YOURSELF
-dbname            | pxls
-authuseip         | false
-authcallbackbase  | http://localhost:4567/auth
-authredditkey     | 
-authredditsecret  | 
-authgooglekey     | 
-authgooglesecret  | 
-authdiscordkey    | 
-authdiscordsecret | 
-authvkkey         | 
-authvksecret      | 
-authtumblrkey     | 
-authtumblrsecret  | 
-
-## Custom Config: ##
-  - Please make an issue for any changes to the way configuration is handled.
-  - Config can be mounted to /pxls.conf and will be pulled into the app  
+## Config: ##
+  - Config should be mounted to /pxls.conf and /roles.conf. This will be pulled into the app  
 
 
 ## Example command: ##
-  - `docker run -p 4567:4567 -e dbhost=pxls-mysql -e dbuser=pxls -e dbpass='an3x@mpl3' -e dbname=pxls -e authuseip='true' registry.nyeprice.space/docker-pxls.space/docker-pxls.space:latest`
+  - `docker run -p 4567:4567 registry.nyeprice.space/docker-pxls.space/docker-pxls.space:latest`
  
