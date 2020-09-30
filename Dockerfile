@@ -14,6 +14,7 @@ LABEL maintainer="Aneurin Price adp@nyeprice.space"
 RUN set -eux; \
 	apk add --no-cache\
 		bash\
+		curl\
 		openjdk14 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing;\
 	addgroup \
 		pxls; \
@@ -28,4 +29,5 @@ USER pxls
 WORKDIR /home/pxls
 COPY --chown=pxls --from=pxls-build /pxls ./
 COPY entrypoint.d/ /entrypoint.d
+HEALTHCHECK CMD curl --fail http://localhost:4567/||exit 1
 ENTRYPOINT [ "/bin/run-parts", "--exit-on-error", "/entrypoint.d" ]
