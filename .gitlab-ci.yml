@@ -10,13 +10,10 @@ build:
   stage: build
   image:
     name: docker:dind
-    entrypoint: [""]
   before_script:
     - apk add git
     - git submodule update --recursive --remote
   script:
-    # CD into Project dir
-    - cd ${CI_PROJECT_DIR}
     # Build Image
     - docker build -t ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA} .
 
