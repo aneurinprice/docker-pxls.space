@@ -87,7 +87,7 @@ push-registry:
     - docker push ${CI_REGISTRY}/${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
     - docker push ${CI_REGISTRY}/${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:latest
 
-push-registry:
+push-dockerhub:
   tags:
     - docker
   stage: push
