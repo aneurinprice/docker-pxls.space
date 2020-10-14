@@ -4,7 +4,7 @@ set -eux
 
 # If CI env var is "yes" move my CI config into place
 if [ "${ci}" == "yes" ]; then
-	mv /ci/pxls.conf ./pxls.conf
+	cp /ci/pxls.conf ./pxls.conf
 	echo "Doing CI things I see"
 
 # If config is mounted to /pxls.conf, move it to workdir
