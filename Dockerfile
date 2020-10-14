@@ -29,5 +29,6 @@ USER pxls
 WORKDIR /home/pxls
 COPY --chown=pxls --from=pxls-build /pxls ./
 COPY entrypoint.d/ /entrypoint.d
+COPY ci/ ci/
 HEALTHCHECK CMD curl --fail http://localhost:4567/||exit 1
 ENTRYPOINT [ "/bin/run-parts", "--exit-on-error", "/entrypoint.d" ]
