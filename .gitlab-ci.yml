@@ -65,8 +65,8 @@ test-launch:
   image:
     name: docker:dind
   script:
-    # Tag for Dockerhub
-    - docker run -d --name pxls-test -v $(pwd)/.pxls.conf:/pxls.conf ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
+    # Test container launches and stays running
+    - docker run -d --name pxls-test -v ./.pxls.conf:/pxls.conf ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
     - sleep 100
     - docker exec pxls-test curl http://localhost:4567 || docker logs pxls-test; docker rm pxls-test
     - docker stop pxls-test
