@@ -60,16 +60,12 @@ test-launch:
     - docker
   stage: test
   image:
-    name: docker:dind
+    name: ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
   services:
     - postgres:latest
   script:
     # Test container launches and stays running
-    - docker run -d --name pxls-test -e ci=yes -v ${CI_PROJECT_DIR}/.pxls.conf:/pxls.conf ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
-    - sleep 30
-    - docker exec pxls-test curl http://localhost:4567 || docker logs pxls-test; docker rm pxls-test
-    - docker stop pxls-test
-    - docker rm pxls-test
+    - curl http://localhost:4567
   artifacts:
     paths:
       - /var/lib/docker
