@@ -66,7 +66,7 @@ test-launch:
     name: docker:dind
   script:
     # Test container launches and stays running
-    - docker run -d --name pxls-test --mount "type=bind source=${CI_PROJECT_DIR}/.pxls.conf,target=/pxls.conf" ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
+    - docker run -d --name pxls-test --mount type=bind,source=${CI_PROJECT_DIR}/.pxls.conf,target=/pxls.conf ${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
     - sleep 100
     - docker exec pxls-test curl http://localhost:4567 || docker logs pxls-test; docker rm pxls-test
     - docker stop pxls-test
