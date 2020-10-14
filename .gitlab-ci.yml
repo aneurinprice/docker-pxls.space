@@ -6,6 +6,7 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
+  POSTGRES_HOST: pxls-postgres
   POSTGRES_PASSWORD: "pxls-password"
   POSTGRES_USER: "pxls-user"
   POSTGRES_DB: "pxls-db"
