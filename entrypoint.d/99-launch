@@ -2,12 +2,4 @@
 
 set -eux
 
-if [[ -f /pxls.conf ]]; then
-	echo "Custom Pxls Config File Detected, Using that"
-	cp /pxls.conf ./pxls.conf
-else
-	echo "No pxls.conf detected, aborting"
-	exit 1
-fi
-
 java -jar ./target/pxls-1.0-SNAPSHOT.jar

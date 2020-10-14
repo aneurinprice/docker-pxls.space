@@ -3,7 +3,7 @@
 set -eux
 
 # If CI env var is "yes" move my CI config into place
-if ${ci} = "yes"; then
+if [ "${ci}" == "yes" ]; then
 	mv /ci/pxls.conf /pxls.conf
 fi
 
