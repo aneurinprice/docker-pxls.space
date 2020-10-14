@@ -78,7 +78,7 @@ test-launch:
 push-registry:
   tags:
     - docker
-  stage: tag
+  stage: push
   image:
     name: docker:dind
   script:
@@ -90,7 +90,7 @@ push-registry:
 push-registry:
   tags:
     - docker
-  stage: tag
+  stage: push
   image:
     name: docker:dind
   script:
