@@ -70,6 +70,6 @@ push-dockerhub:
     name: docker:dind
   script:
     # Push to Dockerhub
-    - docker login --username ${DOCKERHUB_USER} --password ${CI_REGISTRY_PASSWORD}
+    - docker login --username ${DOCKERHUB_USER} --password ${DOCKERHUB_PASSWORD}
     - docker push ${DOCKERHUB_USER}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
     - docker push ${DOCKERHUB_USER}/${CI_PROJECT_NAME}:latest
