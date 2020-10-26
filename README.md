@@ -24,3 +24,4 @@ Accepts http conntections on port 4567
 
 ## Example command: ##
   - `docker run -p 4567:4567 -v $(pwd)/pxls.conf:/pxls.conf registry.nyeprice.space/docker-pxls.space/docker-pxls.space:latest`
+#test
