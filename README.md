@@ -33,7 +33,7 @@ roleID {
   ]
 }
 ```
-This roles config should be mounted to /roles.conf
+This roles config should be mounted to `/roles.conf`
 
 
 
@@ -47,3 +47,7 @@ docker run -p 4567:4567 -v $(pwd)/config:/pxls.conf m08y/docker-pxls.space
 
 - Updated daily, any bugs are likely from upstream changes to the pxls.space codebase
 - You must provice your own database and configmap
+
+
+[Dockerhub](https://hub.docker.com/r/m08y/docker-pxls.space)
+[Github](https://github.com/aneurinprice/docker-pxls.space/)
