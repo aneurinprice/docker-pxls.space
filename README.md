@@ -1,5 +1,9 @@
 # DOCKER-PXLS.SPACE
 
+[Dockerhub](https://hub.docker.com/r/m08y/docker-pxls.space)
+
+[Github](https://github.com/aneurinprice/docker-pxls.space/)
+
 This is a docker container for running [pxls.space](https://github.com/pxlsspace/Pxls). You must provide your own database and config file.
 
 ## Example Config
@@ -47,8 +51,3 @@ docker run -p 4567:4567 -v $(pwd)/config:/pxls.conf m08y/docker-pxls.space
 
 - Updated daily, any bugs are likely from upstream changes to the pxls.space codebase
 - You must provice your own database and configmap
-
-
-[Dockerhub](https://hub.docker.com/r/m08y/docker-pxls.space)
-
-[Github](https://github.com/aneurinprice/docker-pxls.space/)
