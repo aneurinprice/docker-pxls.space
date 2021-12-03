@@ -1,27 +1,49 @@
-# WORK IN PROGRESS BUT PRETTY MUCH STABLE #
+# DOCKER-PXLS.SPACE
 
-## Auto-Mirrored from Gitlab -> Github ->  My Registry ##
+This is a docker container for running [pxls.space](https://github.com/pxlsspace/Pxls). You must provide your own database and config file.
 
-## Please make Pull/Merge Requests on my Gitlab, Issues can be raised anywhere ##
+## Example Config
+### Config
+```
+database {
+  url: "jdbc:postgresql://localhost:3306/pxls"
+  user: "AzureDiamond"
+  pass: "hunter2"
+}
+```
+This config file must be mounted to `/pxls.conf`
 
-### Available on my [Gitlab](https://gitlab.nyeprice.space/moby/docker-pxls-space) ###
+### Roles (Optional)
+```
+roleID {
+  name: Role Name
+  type: GUEST | USER | STAFF
+  default: true | false
+  inherits: [ roleID, ... ]
+  badges: [
+    {
+      name: Badge Name
+      tooltip: Badge Tooltip
+      type: text | icon
+      cssIcon: fas fa-icon-name
+    }
+  ]
+  permissions: [
+    permission.node
+  ]
+}
+```
+This roles config should be mounted to /roles.conf
 
-### Available on [Github](https://github.com/aneurinprice/docker-pxls.space) ###
-
-### Available on [My Registry](https://registry.nyeprice.space) ###
-### Available on [Dockerhub](https://hub.docker.com/r/m08y/docker-pxls.space)
 
 
-## Current Issues: ##
+## How to run
 
-Is based on _alpine:3.12.0_
+```
+docker run -p 4567:4567 -v $(pwd)/config:/pxls.conf m08y/docker-pxls.space
+```
 
-Accepts http conntections on port 4567
+## Gotchas
 
-## Config: ##
-  - Config should be mounted to /pxls.conf and /roles.conf. This will be pulled into the app  
-
-
-## Example command: ##
-  - `docker run -p 4567:4567 -v $(pwd)/pxls.conf:/pxls.conf registry.nyeprice.space/docker-pxls.space/docker-pxls.space:latest`
-#test
+- Updated daily, any bugs are likely from upstream changes to the pxls.space codebase
+- You must provice your own database and configmap
