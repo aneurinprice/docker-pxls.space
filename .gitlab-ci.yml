@@ -16,3 +16,5 @@ build:
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${PERSONAL_DOCKERHUB_USER}/${CI_PROJECT_NAME}:develop"
+      --snapshotMode=redo
+      --use-new-run
