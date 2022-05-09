@@ -6,7 +6,7 @@ build:
   tags:
     - generic
   image:
-    name: gcr.io/kaniko-project/executor:latest
+    name: gcr.io/kaniko-project/executor:latest 
     entrypoint: [""]
   script:
     - mkdir -p /kaniko/.docker
