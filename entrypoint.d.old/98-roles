@@ -6,5 +6,5 @@ if [[ -f /roles.conf ]]; then
 	echo "Custom Roles Config, Using that"
 	cp /roles.conf ./roles.conf
 else
-	echo "No Custom Roles found"
+	echo "No Custom Roles found, Running in Standalone Mode"
 fi
