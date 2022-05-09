@@ -6,7 +6,7 @@ build:
   tags:
     - generic
   image:
-    name: gcr.io/kaniko-project/executor:debug
+    name: gcr.io/kaniko-project/executor:latest
     entrypoint: [""]
   script:
     - mkdir -p /kaniko/.docker
@@ -16,4 +16,3 @@ build:
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${PERSONAL_DOCKERHUB_USER}/${CI_PROJECT_NAME}:develop"
-      --verbosity info
