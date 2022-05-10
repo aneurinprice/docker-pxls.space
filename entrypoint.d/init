@@ -1,11 +1,6 @@
 #!/bin/bash
 
 set -eux
-if [ ! -f /data/pxls.conf ]; then cp /tmp/reference.conf /data/pxls.conf; else echo "Config Found"; fi
-if [ ! -f /data/roles.conf ]; then cp /tmp/roles-reference.conf /data/roles.conf; else echo "Roles Found"; fi
-if [ ! -f /data/palette.conf ]; then cp /tmp/palette-reference.conf /data/palette.conf; else echo "Palette Found"; fi
-
-cp /tmp/pxls.jar /data/pxls.jar
 
 if [ -z ${DATABASE_USER+x} ]; then echo "DATABASE_USER is unset" && exit 1; fi
 if [ -z ${DATABASE_PASSWORD+x} ]; then echo "DATABASE_PASSWORD is unset" && exit 1; fi
@@ -13,10 +8,21 @@ if [ -z ${DATABASE_NAME+x} ]; then echo "DATABASE_NAME is unset" && exit 1; fi
 if [ -z ${DATABASE_HOST+x} ]; then echo "DATABASE_NAME is unset" && exit 1; fi
 if [ -z $PXLS_HOST+x} ]; then echo "DATABASE_NAME is unset" && exit 1; fi
 
-sed -i "s/user:\ \"\"/user:\ \"${DATABASE_USER}\"/g" /data/pxls.conf
-sed -i "s/pass:\ \"\"/pass:\ \"${DATABASE_PASSWORD}\"/g" /data/pxls.conf
-sed -i "s/url:\ \"\"/url:\ \"jdbc:postgresql:\/\/${DATABASE_HOST}:5432\/${DATABASE_NAME}\"/g" /data/pxls.conf
-sed -i "s/host:\ \"\"/pass:\ \"${PXLS_HOST}\"/g" /data/pxls.conf
+
+if [ ! -f /data/roles.conf ]; then cp /tmp/roles-reference.conf /data/roles.conf; else echo "Roles Found"; fi
+if [ ! -f /data/palette.conf ]; then cp /tmp/palette-reference.conf /data/palette.conf; else echo "Palette Found"; fi
+if [ ! -f /data/pxls.conf ]; 
+    then 
+    cp /tmp/reference.conf /data/pxls.conf else echo "Config Found"; fi
+    sed -i "s/user:\ \"\"/user:\ \"${DATABASE_USER}\"/g" /data/pxls.conf
+    sed -i "s/pass:\ \"\"/pass:\ \"${DATABASE_PASSWORD}\"/g" /data/pxls.conf
+    sed -i "s/url:\ \"\"/url:\ \"jdbc:postgresql:\/\/${DATABASE_HOST}:5432\/${DATABASE_NAME}\"/g" /data/pxls.conf
+    sed -i "s/host:\ \"\"/pass:\ \"${PXLS_HOST}\"/g" /data/pxls.conf
+else
+    echo "Config Found"
+fi
+
+cp /tmp/pxls.jar /data/pxls.jar
 
 export JAVA_HOME=/opt/jdk-16.0.2
 export PATH=$PATH:$JAVA_HOME/bin
