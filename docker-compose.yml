@@ -10,6 +10,7 @@ services:
       DATABASE_PASSWORD: "ChAnGeMeAtYoUrEaRlIeStCoNvEnIeNcE"
       DATABASE_NAME: "pxls"
       DATABASE_HOST: "pxls-database"
+      PXLS_HOST: "localhost"
     volumes:
       - pxls-datastore:/data
   
