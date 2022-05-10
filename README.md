@@ -50,3 +50,10 @@ docker-compose up
 
 - Updated daily, any bugs are likely from upstream changes to the pxls.space codebase
 - Config will be stored in a docker volume
+- Container will generate config for database connection and such if they are not detected
+
+
+## Running without Docker Compose
+- Check the environmental variables from the compose file for reference
+- Make sure the credentials are the same
+- Persist /data if you care about it
