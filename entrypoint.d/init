@@ -29,4 +29,5 @@ fi
 export JAVA_HOME=/opt/jdk-16.0.2; \
 export PATH=$PATH:$JAVA_HOME/bin; \
 
+java -version
 java -jar ./target/pxls*.jar
