@@ -23,10 +23,8 @@ RUN set -eux; \
     --home /Pxls \
     --ingroup pxls \
     --uid 6969 \
-    pxls; \
-  chown pxls:pxls /Pxls -R
+    pxls
 
-WORKDIR /Pxls
 COPY entrypoint.d/ /entrypoint.d
 HEALTHCHECK CMD curl --fail http://localhost:4567/||exit 1
 ENTRYPOINT [ "/bin/run-parts", "--exit-on-error", "/entrypoint.d" ]

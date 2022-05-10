@@ -5,7 +5,7 @@ set -eux
 cp resources/reference.conf /data/pxls.conf
 cp resources/roles-reference.conf /data/roles.conf
 cp resources/palette-reference.conf /data/palette.conf
-cp /Pxls/target/pxls*./jar /data/pxls.jar
+cp /Pxls/target/pxls*.jar /data/pxls.jar
 
 if [ -z ${DATABASE_USER+x} ]; then echo "DATABASE_USER is unset" && exit 1; fi
 if [ -z ${DATABASE_PASSWORD+x} ]; then echo "DATABASE_PASSWORD is unset" && exit 1; fi
