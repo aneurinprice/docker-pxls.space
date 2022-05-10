@@ -2,30 +2,25 @@
 
 set -eux
 
-# If config is mounted to /pxls.conf, move it to workdir
-if [[ -f /pxls.conf ]]; then
-	echo "Custom Pxls Config File Detected, Using that"
-	cp /pxls.conf ./pxls.conf
-else
+cp resources/reference.conf /data/pxls.conf
+cp resources/roles-reference.conf /data/roles.conf
+cp resources/palette-reference.conf /data/palette.conf
 
-	echo "No manual config detected, running in Standalone Mode"
-        cp resources/reference.conf /data/pxls.conf
-        cp resources/roles-reference.conf /data/roles.conf
-        cp resources/palette-reference.conf /data/palette.conf
+if [ -z ${DATABASE_USER+x} ]; then echo "DATABASE_USER is unset" && exit 1; fi
+if [ -z ${DATABASE_PASSWORD+x} ]; then echo "DATABASE_PASSWORD is unset" && exit 1; fi
+if [ -z ${DATABASE_NAME+x} ]; then echo "DATABASE_NAME is unset" && exit 1; fi
+if [ -z ${DATABASE_HOST+x} ]; then echo "DATABASE_NAME is unset" && exit 1; fi
+if [ -z $PXLS_HOST+x} ]; then echo "DATABASE_NAME is unset" && exit 1; fi
 
-	if [ -z ${DATABASE_USER+x} ]; then echo "DATABASE_USER is unset" && exit 1; fi
-	if [ -z ${DATABASE_PASSWORD+x} ]; then echo "DATABASE_PASSWORD is unset" && exit 1; fi
-	if [ -z ${DATABASE_NAME+x} ]; then echo "DATABASE_NAME is unset" && exit 1; fi
-	if [ -z ${DATABASE_HOST+x} ]; then echo "DATABASE_NAME is unset" && exit 1; fi
+sed -i "s/user:\ \"\"/user:\ \"${DATABASE_USER}\"/g" /data/pxls.conf
+sed -i "s/pass:\ \"\"/pass:\ \"${DATABASE_PASSWORD}\"/g" /data/pxls.conf
+sed -i "s/url:\ \"\"/url:\ \"jdbc:postgresql:\/\/${DATABASE_HOST}:5432\/${DATABASE_NAME}\"/g" /data/pxls.conf
+sed -i "s/host:\ \"\"/pass:\ \"${PXLS_HOST}\"/g" /data/pxls.conf
 
-	sed -i "s/user:\ \"\"/user:\ \"${DATABASE_USER}\"/g" /data/pxls.conf
-	sed -i "s/pass:\ \"\"/pass:\ \"${DATABASE_PASSWORD}\"/g" /data/pxls.conf
-	sed -i "s/url:\ \"\"/url:\ \"jdbc:postgresql:\/\/${DATABASE_HOST}:5432\/${DATABASE_NAME}\"/g" /data/pxls.conf
-	
-	cp /data/*.conf .
-	chown pxls:pxls . -R
-
-fi
+cp /data/*.conf .
+mkdir -p /data/backups
+ln -s /Pxls/backups /data/backups
+chown pxls:pxls . -R
 
 export JAVA_HOME=/opt/jdk-16.0.2; \
 
