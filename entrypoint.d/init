@@ -5,9 +5,9 @@ set -eux
 ls -l /tmp
 ls -l /tmp/pxls
 
-cp /tmp/pxls/resources/reference.conf /data/pxls.conf
-cp /tmp/pxls/resources/roles-reference.conf /data/roles.conf
-cp /tmp/pxls/resources/palette-reference.conf /data/palette.conf
+cp /tmp/pxls/reference.conf /data/pxls.conf
+cp /tmp/pxls/roles-reference.conf /data/roles.conf
+cp /tmp/pxls/palette-reference.conf /data/palette.conf
 cp /tmp/pxls.jar /data/pxls.jar
 
 if [ -z ${DATABASE_USER+x} ]; then echo "DATABASE_USER is unset" && exit 1; fi
