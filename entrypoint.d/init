@@ -1,10 +1,10 @@
 #!/bin/bash
 
 set -eux
+if [ ! -f /data/pxls.conf ]; then cp /tmp/reference.conf /data/pxls.conf; else echo "Config Found"; fi
+if [ ! -f /data/roles.conf ]; then cp /tmp/roles-reference.conf /data/roles.conf; else echo "Roles Found"; fi
+if [ ! -f /data/palette.conf ]; then cp /tmp/palette-reference.conf /data/palette.conf; else echo "Palette Found"; fi
 
-cp /tmp/reference.conf /data/pxls.conf
-cp /tmp/roles-reference.conf /data/roles.conf
-cp /tmp/palette-reference.conf /data/palette.conf
 cp /tmp/pxls.jar /data/pxls.jar
 
 if [ -z ${DATABASE_USER+x} ]; then echo "DATABASE_USER is unset" && exit 1; fi
