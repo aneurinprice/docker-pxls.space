@@ -8,7 +8,7 @@ build:
   image:
     name: docker:dind
   script:
-    - echo "${PERSONAL_DOCKERHUB_PASSWORD}|docker login --username "${PERSONAL_DOCKERHUB_USER}" --password-stdin
+    - echo "${PERSONAL_DOCKERHUB_PASSWORD}" | docker login --username "${PERSONAL_DOCKERHUB_USER}" --password-stdin
     - docker build --tag "${CI_COMMIT_SHORT_SHA}" --file "${CI_PROJECT_DIR}/Dockerfile" "${CI_PROJECT_DIR}"
     - docker tag "${CI_COMMIT_SHORT_SHA}" "${PERSONAL_DOCKERHUB_USER}"/"${CI_PROJECT_NAME}":develop
     - docker push "${PERSONAL_DOCKERHUB_USER}"/"${CI_PROJECT_NAME}":develop
