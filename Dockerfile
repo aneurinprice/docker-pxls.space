@@ -15,15 +15,8 @@ RUN set -eux; \
   git clone https://github.com/pxlsspace/Pxls.git; \
   cd Pxls/; \
   mvn clean package; \
-  addgroup \
-    pxls; \
-  adduser \
-    --disabled-password \
-    --gecos "" \
-    --home /Pxls \
-    --ingroup pxls \
-    --uid 6969 \
-    pxls
+  cp /Pxls/target/pxls*.jar /tmp/pxls.jar; \
+  rm -rf /Pxls
 
 COPY entrypoint.d/ /entrypoint.d
 HEALTHCHECK CMD curl --fail http://localhost:4567/||exit 1
