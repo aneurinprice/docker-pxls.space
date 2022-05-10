@@ -13,7 +13,9 @@ RUN set -eux; \
   git clone https://github.com/pxlsspace/Pxls.git; \
   cd Pxls/; \
   mvn clean package; \
-  cp /Pxls/target/pxls*.jar /tmp/pxls.jar
+  mkdir /tmp/pxls; \
+  cp /Pxls/target/pxls*.jar /tmp/pxls/pxls.jar; \
+  cp -r resources/* /tmp/pxls/
 
 
 FROM debian:bullseye-slim
@@ -25,7 +27,7 @@ RUN set -eux; \
   curl  -O https://download.java.net/java/GA/jdk16.0.2/d4a915d82b4c4fbb9bde534da945d746/7/GPL/openjdk-16.0.2_linux-x64_bin.tar.gz; \
   tar -xvf openjdk-16.0.2_linux-x64_bin.tar.gz; \
   mv jdk-16.0.2 /opt/
-COPY --from=build /tmp/pxls.jar /tmp/pxls.jar
+COPY --from=build /tmp/pxls /tmp/
 COPY entrypoint.d/ /entrypoint.d
 HEALTHCHECK CMD curl --fail http://localhost:4567/ || exit 1
 ENTRYPOINT [ "/bin/run-parts", "--exit-on-error", "/entrypoint.d" ]
