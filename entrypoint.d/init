@@ -13,7 +13,7 @@ if [ ! -f /data/roles.conf ]; then cp /tmp/roles-reference.conf /data/roles.conf
 if [ ! -f /data/palette.conf ]; then cp /tmp/palette-reference.conf /data/palette.conf; else echo "Palette Found"; fi
 if [ ! -f /data/pxls.conf ]; 
     then 
-    cp /tmp/reference.conf /data/pxls.conf else echo "Config Found"; fi
+    cp /tmp/reference.conf /data/pxls.conf
     sed -i "s/user:\ \"\"/user:\ \"${DATABASE_USER}\"/g" /data/pxls.conf
     sed -i "s/pass:\ \"\"/pass:\ \"${DATABASE_PASSWORD}\"/g" /data/pxls.conf
     sed -i "s/url:\ \"\"/url:\ \"jdbc:postgresql:\/\/${DATABASE_HOST}:5432\/${DATABASE_NAME}\"/g" /data/pxls.conf
