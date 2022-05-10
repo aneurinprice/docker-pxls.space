@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   pxls-frontend:
-    image: m08y/docker-pxls-space:latest
+    image: m08y/docker-pxls-space:develop
     restart: always
     ports:
       - "4567:4567"
@@ -10,6 +10,8 @@ services:
       DATABASE_PASSWORD: "ChAnGeMeAtYoUrEaRlIeStCoNvEnIeNcE"
       DATABASE_NAME: "pxls"
       DATABASE_HOST: "pxls-database"
+    volumes:
+      - pxls-datastore:/data
   
   pxls-database:
     image: postgres
@@ -23,3 +25,4 @@ services:
 
 volumes:
   pxls-database: {}
+  pxls-datastore: {}

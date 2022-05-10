@@ -21,11 +21,12 @@ else
 	sed -i "s/user:\ \"\"/user:\ \"${DATABASE_USER}\"/g" /data/pxls.conf
 	sed -i "s/pass:\ \"\"/pass:\ \"${DATABASE_PASSWORD}\"/g" /data/pxls.conf
 	sed -i "s/url:\ \"\"/url:\ \"jdbc:postgresql:\/\/${DATABASE_HOST}:5432\/${DATABASE_NAME}\"/g" /data/pxls.conf
-
+	
+	cp /data/*.conf .
 
 fi
 
 export JAVA_HOME=/opt/jdk-16.0.2; \
 export PATH=$PATH:$JAVA_HOME/bin; \
 
-java -jar ./pxls*.jar
+java -jar ./target/pxls*.jar
