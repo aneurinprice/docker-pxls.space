@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk16:alpine AS build
+FROM debian:bullseye-slim AS build
 
 RUN set -eux; \
   apt-get update; \
