@@ -33,7 +33,7 @@ test:
   tags:
     - docker-socket
   image:
-    name: busybox
+    name: curlimages/curl
   script:
     - curl http://pxls-frontend:4567
 
