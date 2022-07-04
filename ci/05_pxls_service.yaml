@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "pxls-test"
-  namespace: "pxls"
+  name: pxls-test
+  namespace: pxls-test
   labels:
     app: "pxls"
     tier: "frontend"
