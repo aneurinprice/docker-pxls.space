@@ -1,5 +1,8 @@
 stages:
   - build
+  - deploy
+  - test
+  - teardown
 
 build:
   stage: build
@@ -14,3 +17,32 @@ build:
     - docker tag "${CI_COMMIT_SHORT_SHA}" "${PERSONAL_DOCKERHUB_USER}"/"${CI_PROJECT_NAME}":latest
     - docker push "${PERSONAL_DOCKERHUB_USER}"/"${CI_PROJECT_NAME}":"${CI_COMMIT_SHORT_SHA}"
     - docker push "${PERSONAL_DOCKERHUB_USER}"/"${CI_PROJECT_NAME}":latest
+
+deploy:
+  stage: deploy
+  tags:
+    - docker-socket
+  image:
+    name: docker/compose
+  script:
+    - cd ci/
+    - docker-compose up -d
+
+test:
+  stage: test
+  tags:
+    - docker-socket
+  image:
+    name: busybox
+  script:
+    - curl http://pxls-frontend:4567
+
+teardown:
+  stage: teardown
+  tags:
+    - docker-socket
+  image:
+    name: docker/compose
+  script:
+    - cd ci/
+    - docker-compose down
