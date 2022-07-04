@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pxls-app
-  namespace: pxls
+  namespace: pxls-test
 spec:
   selector:
     matchLabels:
