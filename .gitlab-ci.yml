@@ -1,7 +1,5 @@
 stages:
   - build
-  - deploy
-  - test
 
 build:
   stage: build
@@ -16,26 +14,3 @@ build:
     - docker tag "${CI_COMMIT_SHORT_SHA}" "${PERSONAL_DOCKERHUB_USER}"/"${CI_PROJECT_NAME}":latest
     - docker push "${PERSONAL_DOCKERHUB_USER}"/"${CI_PROJECT_NAME}":"${CI_COMMIT_SHORT_SHA}"
     - docker push "${PERSONAL_DOCKERHUB_USER}"/"${CI_PROJECT_NAME}":latest
-
-deploy:
-  stage: deploy
-  tags:
-    - k8s-access
-  image:
-    name: bitnami/kubectl
-  script:
-    - cd ci/
-    - kubectl apply -f ./01_namespace.yaml
-    - kubectl apply -f ./02_postgres_deployment.yaml
-    - kubectl apply -f ./03_postgres_service.yaml
-    - kubectl apply -f ./04_pxls_deployment.yaml
-    - kubectl apply -f ./05_pxls_service.yaml
-
-test:
-  stage: test
-  tags:
-    - generic
-  image:
-    name: curlimages/curl
-  script:
-    - curl http://pxls-test.pxls-test.svc.cluster.local:4567

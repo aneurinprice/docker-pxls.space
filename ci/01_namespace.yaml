@@ -1,9 +1,0 @@
----
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: "pxls-test"
-  labels:
-    primary-app: "pxls"
-    allow-loadbalancer: "false"
-    environment: "testing"
