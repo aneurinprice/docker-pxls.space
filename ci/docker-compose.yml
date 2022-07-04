@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3"
 services:
   pxls-frontend:
     image: m08y/docker-pxls-space:latest
