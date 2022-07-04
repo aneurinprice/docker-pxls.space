@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres-app
-  namespace: postgres
+  namespace: "pxls-test"
 spec:
   selector:
     matchLabels:
@@ -13,7 +13,7 @@ spec:
   replicas: 1
   template:
     metadata:
-      namespace: "pxls-test-${CI_COMMIT_SHORT_SHA}"
+      namespace: "pxls-test"
       labels:
         app: "postgres"
         tier: "frontend"

@@ -26,9 +26,9 @@ deploy:
     - cd ci/
     - kubectl apply -f ./01_namespace.yaml
     - kubectl apply -f ./02_postgres_deployment.yaml
-    - kubectl wait pods --for=condition=ready --namespace "pxls-test-${CI_COMMIT_SHORT_SHA}" --selector app=postgres 
+    - kubectl wait pods --for=condition=ready --namespace "pxls-test" --selector app=postgres 
     - kubectl apply -f ./03_postgres_service.yaml
     - kubectl apply -f ./04_pxls_deployment.yaml
-    - kubectl wait pods --for=condition=ready --namespace "pxls-test-${CI_COMMIT_SHORT_SHA}" --selector app=pxls 
+    - kubectl wait pods --for=condition=ready --namespace "pxls-test" --selector app=pxls 
     - kubectl apply 0f ./05_pxls_service.yaml
 

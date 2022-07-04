@@ -13,7 +13,7 @@ spec:
   replicas: 1
   template:
     metadata:
-      namespace: "pxls-test-${CI_COMMIT_SHORT_SHA}"
+      namespace: "pxls-test"
       labels:
         app: "pxls"
         tier: "frontend"
@@ -31,7 +31,7 @@ spec:
             - name: "DATABASE_NAME"
               value: "pxls"
             - name: "DATABASE_HOST"
-              value: "postgres-test-${CI_COMMIT_SHORT_SHA}"
+              value: "postgres-test"
             - name: "PXLS_HOST"
               value: "0.0.0.0"
           ports:
