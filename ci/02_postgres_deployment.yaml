@@ -24,6 +24,12 @@ spec:
         - name: "postgres"
           image: "postgres"
           env:
+            - name: "POSTGRES_USER"
+              value: "pxls"
+            - name: "POSTGRES_PASSWORD"
+              value: "ChAnGeMeAtYoUrEaRlIeStCoNvEnIeNcE"
+            - name: "POSTGRES_DB"
+              value: "pxls"
           ports:
             - containerPort: 5432
               name: "postgres"
