@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pxls-app
+  namespace: pxls
+spec:
+  selector:
+    matchLabels:
+      app: "pxls"
+      tier: "frontend"
+      environment: "testing"
+  replicas: 1
+  template:
+    metadata:
+      namespace: "pxls-test-${CI_COMMIT_SHORT_SHA}"
+      labels:
+        app: "pxls"
+        tier: "frontend"
+        environment: "testing"
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: "pxls"
+          image: "pxls/pxls:${CI_COMMIT_SHORT_SHA}"
+          env:
+            - name: "DATABASE_USER"
+              value: "${CI_COMMIT_SHORT_SHA}"
+            - name: "DATABASE_PASSWORD"
+              value: "${CI_COMMIT_SHORT_SHA}
+            - name: "DATABASE_NAME"
+              value: "pxls"
+            - name: "DATABASE_HOST"
+              value: "postgres-test-${CI_COMMIT_SHORT_SHA}"
+            - name: "PXLS_HOST"
+              value: "0.0.0.0"
+          ports:
+            - containerPort: 4567
+              name: "pxls-console"

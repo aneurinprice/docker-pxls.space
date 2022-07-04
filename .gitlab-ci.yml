@@ -1,8 +1,6 @@
 stages:
   - build
   - deploy
-  - test
-  - teardown
 
 build:
   stage: build
@@ -21,28 +19,16 @@ build:
 deploy:
   stage: deploy
   tags:
-    - docker-socket
+    - k8s-access
   image:
-    name: docker/compose
+    name: bitnami/kubectl
   script:
     - cd ci/
-    - docker-compose up -d
+    - kubectl apply -f ./01_namespace.yaml
+    - kubectl apply -f ./02_postgres_deployment.yaml
+    - kubectl wait pods --for=condition=ready --namespace "pxls-test-${CI_COMMIT_SHORT_SHA}" --selector app=postgres 
+    - kubectl apply -f ./03_postgres_service.yaml
+    - kubectl apply -f ./04_pxls_deployment.yaml
+    - kubectl wait pods --for=condition=ready --namespace "pxls-test-${CI_COMMIT_SHORT_SHA}" --selector app=pxls 
+    - kubectl apply 0f ./05_pxls_service.yaml
 
-test:
-  stage: test
-  tags:
-    - docker-socket
-  image:
-    name: curlimages/curl
-  script:
-    - curl http://pxls-frontend:4567
-
-teardown:
-  stage: teardown
-  tags:
-    - docker-socket
-  image:
-    name: docker/compose
-  script:
-    - cd ci/
-    - docker-compose down
