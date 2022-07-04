@@ -1,6 +1,7 @@
 stages:
   - build
   - deploy
+  - test
 
 build:
   stage: build
@@ -30,3 +31,11 @@ deploy:
     - kubectl apply -f ./04_pxls_deployment.yaml
     - kubectl apply -f ./05_pxls_service.yaml
 
+test:
+  stage: test
+  tags:
+    - generic
+  image:
+    name: curlimages/curl
+  script:
+    - curl http://pxls-test.pxls-test.svc.cluster.local:4567

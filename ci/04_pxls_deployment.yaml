@@ -22,7 +22,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: "pxls"
-          image: "pxls/pxls:latest"
+          image: "m08y/docker-pxls-space:latest"
           env:
             - name: "DATABASE_USER"
               value: "pxls"
