@@ -28,5 +28,5 @@ deploy:
     - kubectl apply -f ./02_postgres_deployment.yaml
     - kubectl apply -f ./03_postgres_service.yaml
     - kubectl apply -f ./04_pxls_deployment.yaml
-    - kubectl apply 0f ./05_pxls_service.yaml
+    - kubectl apply -f ./05_pxls_service.yaml
 
