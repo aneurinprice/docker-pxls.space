@@ -1,32 +1,15 @@
-FROM debian:bullseye-slim AS build
+FROM maven:3.8.3-openjdk-16 AS build
 
-RUN set -eux; \
-  apt-get update; \
-  export DEBIAN_FRONTEND=noninteractive; \
-  apt-get -y install maven git curl ; \
-  curl  -O https://download.java.net/java/GA/jdk16.0.2/d4a915d82b4c4fbb9bde534da945d746/7/GPL/openjdk-16.0.2_linux-x64_bin.tar.gz; \
-  tar -xvf openjdk-16.0.2_linux-x64_bin.tar.gz; \
-  mv jdk-16.0.2 /opt/; \
-  export JAVA_HOME=/opt/jdk-16.0.2; \
-  export PATH=$PATH:$JAVA_HOME/bin; \
-  java -version; \
-  git clone https://github.com/pxlsspace/Pxls.git; \
-  cd Pxls/; \
-  mvn clean package; \
-  mkdir /tmp/pxls; \
-  cp /Pxls/target/pxls*.jar /tmp/pxls/pxls.jar; \
-  cp -r resources/* /tmp/pxls/
+RUN java -version
+RUN git clone https://github.com/pxlsspace/Pxls.git;
+RUN cd Pxls; \
+mvn clean package; \
+mkdir /tmp/pxls; \
+cp target/pxls*.jar /tmp/pxls/pxls.jar; \
+cp -r resources/* /tmp/pxls
 
-
-FROM debian:bullseye-slim
+FROM adoptopenjdk/openjdk16
 LABEL maintainer="Aneurin Price adp@nyeprice.space"
-RUN set -eux; \
-  apt-get update; \
-  export DEBIAN_FRONTEND=noninteractive; \
-  apt-get -y install curl ; \
-  curl  -O https://download.java.net/java/GA/jdk16.0.2/d4a915d82b4c4fbb9bde534da945d746/7/GPL/openjdk-16.0.2_linux-x64_bin.tar.gz; \
-  tar -xvf openjdk-16.0.2_linux-x64_bin.tar.gz; \
-  mv jdk-16.0.2 /opt/
 COPY --from=build /tmp/pxls /tmp/
 COPY entrypoint.d/ /entrypoint.d
 HEALTHCHECK CMD curl --fail http://localhost:4567/ || exit 1
