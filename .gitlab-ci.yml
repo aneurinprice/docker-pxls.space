@@ -56,6 +56,7 @@ deploy:
       - .gitlab-ci.yml
   script:
     - envsubst < .ci-tests/pxls-database.yaml | kubectl apply -f -
+    - envsubst < .ci-tests/pxls-database-service.yaml | kubectl apply -f -
     - kubectl wait pods  -l app=${CI_PROJECT_TITLE},component=database --for condition=Ready --timeout=90s
 
 push-to-harbor:

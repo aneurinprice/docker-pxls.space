@@ -29,17 +29,3 @@ spec:
             value: "yes"
         ports:
           - containerPort: 4567
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: "${CI_PROJECT_TITLE}-database"
-spec:
-  selector:
-    app: "${CI_PROJECT_TITLE}-database"
-    component: "database"
-  ports:
-    - name: database
-      protocol: TCP
-      port: 4567
-      targetPort: 4567
