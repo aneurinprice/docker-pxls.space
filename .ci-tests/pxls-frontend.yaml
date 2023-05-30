@@ -18,7 +18,7 @@ spec:
       containers:
       - name: "${CI_PROJECT_TITLE}"
         image: "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
-	volumeMounts:
+        volumeMounts:
           - name: data
             mountPath: /data
         env:
