@@ -1,5 +1,6 @@
 stages:
   - build
+  - push
 
 build:
   stage: build
@@ -14,4 +15,16 @@ build:
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --no-push
       --destination tar
-      --tar-path "${CI_PROJECT_TITLE}".tar
+      --tar-path "${CI_PROJECT_TITLE}.tar"
+
+push-to-harbor:
+  stage: push 
+  image:
+    name: gcr.io/go-containerregistry/crane:debug
+    entrypoint: [""]
+  dependencies:
+    - build
+  script:
+    - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/${CI_PROJECT_TITLE}.tar:${CI_COMMIT_SHORT_SHA}"
+    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/${CI_PROJECT_TITLE}.tar:latest"
