@@ -42,9 +42,13 @@ push-dev:
 
 deploy:
   stage: deploy
+  tags:
+    - privileged
   image:
-    name: bitnami/kubectl
+    name: thisiskj/kubectl-envsubst
     entrypoint: [""]
+  variables:
+    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-generic
   rules:
     - changes:
       - Dockerfile
