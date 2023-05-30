@@ -57,7 +57,7 @@ deploy-database:
       - .gitlab-ci.yml
   script:
     - envsubst < .ci-tests/pxls-database.yaml | kubectl apply -f -
-    - kubectl wait pods  -l app=${CI_PROJECT_TITLE},component=database --for condition=Ready --timeout=90s
+    - kubectl wait pods  -l app="${CI_PROJECT_TITLE}",component=database --for condition=Ready --timeout=90s
 
 deploy-frontend:
   stage: deploy
@@ -75,7 +75,7 @@ deploy-frontend:
       - .gitlab-ci.yml
   script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl apply -f -
-    - kubectl wait pods  -l app=${CI_PROJECT_TITLE},component=frontend --for condition=Ready --timeout=90s
+    - kubectl wait pods  -l app="${CI_PROJECT_TITLE}",component=frontend --for condition=Ready --timeout=90s
 
 test-frontend:
   stage: test
