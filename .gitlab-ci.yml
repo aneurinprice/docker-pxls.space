@@ -13,4 +13,5 @@ build:
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --no-push
+      --destination tar
       --tar-path "${CI_PROJECT_TITLE}".tar
