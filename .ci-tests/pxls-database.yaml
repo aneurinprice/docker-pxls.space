@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "${CI_PROJECT_TITLE}"
+  name: "${CI_PROJECT_TITLE}-database"
 spec:
   replicas: 1
   selector:
