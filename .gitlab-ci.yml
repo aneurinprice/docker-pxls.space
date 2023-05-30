@@ -9,6 +9,10 @@ build:
   image:
     name: gcr.io/kaniko-project/executor:v1.10.0-debug
     entrypoint: [""]
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint
   script:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
