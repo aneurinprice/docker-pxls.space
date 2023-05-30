@@ -7,7 +7,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "${CI_PROJECT_TITLE}"
+      app: "${CI_PROJECT_TITLE}-database"
       component: "database"
   template:
     metadata:
