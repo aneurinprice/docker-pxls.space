@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: "${CI_PROJECT_TITLE}"
+        app: "${CI_PROJECT_TITLE}-database"
         component: "database"
     spec:
       containers:
