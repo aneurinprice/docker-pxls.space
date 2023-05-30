@@ -2,17 +2,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "${CI_PROJECT_TITLE}-database"
+  name: "${CI_PROJECT_TITLE}"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "${CI_PROJECT_TITLE}-database"
+      app: "${CI_PROJECT_TITLE}"
       component: "database"
   template:
     metadata:
       labels:
-        app: "${CI_PROJECT_TITLE}-database"
+        app: "${CI_PROJECT_TITLE}"
         component: "database"
     spec:
       containers:
@@ -34,7 +34,7 @@ metadata:
   name: "${CI_PROJECT_TITLE}-database"
 spec:
   selector:
-    app: "${CI_PROJECT_TITLE}-database"
+    app: "${CI_PROJECT_TITLE}"
     component: "database"
   ports:
     - name: database
