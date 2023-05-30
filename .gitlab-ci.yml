@@ -2,6 +2,7 @@ stages:
   - build
   - push-dev
   - deploy
+  - test
   - push
 
 build:
@@ -75,6 +76,19 @@ deploy-frontend:
   script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl apply -f -
     - kubectl wait pods  -l app=${CI_PROJECT_TITLE},component=frontend --for condition=Ready --timeout=90s
+
+test-frontend:
+  stage: test
+  image:
+    name: busybox
+    entrypoint: [""]
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint
+      - .gitlab-ci.yml
+  script:
+    - curl ${CI_PROJECT_TITLE}-frontend:4567
 
 push-to-harbor:
   stage: push 

@@ -28,7 +28,7 @@ spec:
           - name: MARIADB_ALLOW_EMPTY_ROOT_PASSWORD
             value: "yes"
         ports:
-          - containerPort: 4567
+          - containerPort: 3306
 ---
 apiVersion: v1
 kind: Service
@@ -41,5 +41,5 @@ spec:
   ports:
     - name: database
       protocol: TCP
-      port: 4567
-      targetPort: 4567
+      port: 3306
+      targetPort: 3306
