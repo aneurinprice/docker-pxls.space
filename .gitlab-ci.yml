@@ -3,6 +3,7 @@ stages:
   - push-dev
   - deploy
   - test
+  - teardown
   - push
 
 build:
@@ -89,6 +90,40 @@ test-frontend:
       - .gitlab-ci.yml
   script:
     - curl ${CI_PROJECT_TITLE}-frontend:4567
+
+destroy-database:
+  stage: teardown
+  tags:
+    - privileged
+  image:
+    name: thisiskj/kubectl-envsubst
+    entrypoint: [""]
+  variables:
+    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-privileged
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint
+      - .gitlab-ci.yml
+  script:
+    - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
+
+destroy-frontend:
+  stage: teardown
+  tags:
+    - privileged
+  image:
+    name: thisiskj/kubectl-envsubst
+    entrypoint: [""]
+  variables:
+    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-privileged
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint
+      - .gitlab-ci.yml
+  script:
+    - envsubst < .ci-tests/pxls-frontend.yaml | kubectl delete -f -
 
 push-to-harbor:
   stage: push 
