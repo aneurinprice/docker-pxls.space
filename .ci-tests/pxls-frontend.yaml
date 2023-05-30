@@ -18,6 +18,9 @@ spec:
       containers:
       - name: "${CI_PROJECT_TITLE}"
         image: "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
+	volumeMounts:
+          - name: data
+            mountPath: /data
         env:
           - name: DATABASE_USER
             value: "${CI_PROJECT_TITLE}"
@@ -31,6 +34,10 @@ spec:
             value: "${CI_PROJECT_TITLE}-frontend"
         ports:
         - containerPort: 4567
+      volumes:
+        - name: cache-volume
+          emptyDir:
+
 ---
 apiVersion: v1
 kind: Service
