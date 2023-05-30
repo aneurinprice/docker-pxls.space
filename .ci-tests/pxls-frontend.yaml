@@ -29,7 +29,7 @@ spec:
           - name: DATABASE_NAME
             value: "${CI_PROJECT_TITLE}"
           - name: DATABASE_HOST
-            value: "${CI_PROJECT_TITLE}-database"
+            value: "${CI_PROJECT_TITLE}-database.svc"
           - name: PXLS_HOST
             value: "${CI_PROJECT_TITLE}-frontend"
         ports:
