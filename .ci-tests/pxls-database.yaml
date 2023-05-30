@@ -17,18 +17,16 @@ spec:
     spec:
       containers:
       - name: "${CI_PROJECT_TITLE}-database"
-        image: "mariadb:latest"
+        image: "postgres:latest"
         env:
-          - name: MARIADB_USER
+          - name: POSTGRES_USER
             value: "${CI_PROJECT_TITLE}"
-          - name: MARIADB_PASSWORD
+          - name: POSTGRES_PASSWORD
             value: "${CI_PROJECT_TITLE}"
-          - name: MARIADB_DATABASE
+          - name: POSTGRES_DA
             value: "${CI_PROJECT_TITLE}"
-          - name: MARIADB_ALLOW_EMPTY_ROOT_PASSWORD
-            value: "yes"
         ports:
-          - containerPort: 3306
+          - containerPort: 5432
 ---
 apiVersion: v1
 kind: Service
@@ -41,5 +39,5 @@ spec:
   ports:
     - name: database
       protocol: TCP
-      port: 3306
-      targetPort: 3306
+      port: 5432
+      targetPort: 5432
