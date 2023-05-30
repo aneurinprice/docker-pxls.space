@@ -40,7 +40,7 @@ push-dev:
     - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
 
-deploy:
+deploy-database:
   stage: deploy
   tags:
     - privileged
@@ -58,6 +58,24 @@ deploy:
     - envsubst < .ci-tests/pxls-database.yaml | kubectl apply -f -
     - envsubst < .ci-tests/pxls-database-service.yaml | kubectl apply -f -
     - kubectl wait pods  -l app=${CI_PROJECT_TITLE},component=database --for condition=Ready --timeout=90s
+
+deploy-frontend:
+  stage: deploy
+  tags:
+    - privileged
+  image:
+    name: thisiskj/kubectl-envsubst
+    entrypoint: [""]
+  variables:
+    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-privileged
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint
+      - .gitlab-ci.yml
+  script:
+    - envsubst < .ci-tests/pxls-frontend.yaml | kubectl apply -f -
+    - kubectl wait pods  -l app=${CI_PROJECT_TITLE},component=frontend --for condition=Ready --timeout=90s
 
 push-to-harbor:
   stage: push 
