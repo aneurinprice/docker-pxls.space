@@ -13,6 +13,7 @@ build:
     - changes:
       - Dockerfile
       - entrypoint
+      - .gitlab-ci.yml
   script:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
@@ -26,6 +27,11 @@ push-to-harbor:
   image:
     name: gcr.io/go-containerregistry/crane:debug
     entrypoint: [""]
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint
+      - .gitlab-ci.yml
   dependencies:
     - build
   script:
