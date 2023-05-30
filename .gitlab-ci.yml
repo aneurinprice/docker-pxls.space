@@ -48,7 +48,7 @@ deploy:
     name: thisiskj/kubectl-envsubst
     entrypoint: [""]
   variables:
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-generic
+    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-privileged
   rules:
     - changes:
       - Dockerfile
