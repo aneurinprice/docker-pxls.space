@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "${CI_PROJECT_TITLE}"
+  name: "${CI_PROJECT_TITLE}-frontend"
 spec:
   replicas: 1
   selector:
@@ -36,7 +36,7 @@ spec:
         - containerPort: 4567
       volumes:
         - name: cache-volume
-          emptyDir:
+          emptyDir: {}
 
 ---
 apiVersion: v1
