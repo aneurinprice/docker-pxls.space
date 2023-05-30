@@ -80,7 +80,7 @@ deploy-frontend:
 test-frontend:
   stage: test
   image:
-    name: busybox
+    name: curlimages/curl
     entrypoint: [""]
   rules:
     - changes:
