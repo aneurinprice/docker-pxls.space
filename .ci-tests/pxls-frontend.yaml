@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "${CI_PROJECT_TITLE}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "${CI_PROJECT_TITLE}"
+      component: "frontend"
+  template:
+    metadata:
+      labels:
+        app: "${CI_PROJECT_TITLE}"
+        component: "frontend"
+    spec:
+      containers:
+      - name: "${CI_PROJECT_TITLE}"
+        image: "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
+        env:
+          - name: DATABASE_USER
+            value: "${CI_PROJECT_TITLE}"
+          - name: DATABASE_PASSWORD
+            value: "${CI_PROJECT_TITLE}"
+          - name: DATABASE_NAME
+            value: "${CI_PROJECT_TITLE}"
+          - name: DATABASE_HOST
+            value: "${CI_PROJECT_TITLE}-database"
+          - name: PXLS_HOST
+            value: "${CI_PROJECT_TITLE}-frontend"
+        ports:
+        - containerPort: 4567
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "${CI_PROJECT_TITLE}-frontend"
+spec:
+  selector:
+    app: "${CI_PROJECT_TITLE}"
+    component: "frontend"
+  ports:
+    - name: frontend
+      protocol: TCP
+      port: 4567
+      targetPort: 4567
