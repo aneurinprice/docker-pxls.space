@@ -23,7 +23,7 @@ spec:
             value: "${CI_PROJECT_TITLE}"
           - name: POSTGRES_PASSWORD
             value: "${CI_PROJECT_TITLE}"
-          - name: POSTGRES_DA
+          - name: POSTGRES_DB
             value: "${CI_PROJECT_TITLE}"
         ports:
           - containerPort: 5432
