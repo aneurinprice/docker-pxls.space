@@ -1,3 +1,4 @@
+---
 version: "3.9"
 services:
   pxls-frontend:
@@ -13,7 +14,7 @@ services:
       PXLS_HOST: "localhost"
     volumes:
       - pxls-datastore:/data
-  
+
   pxls-database:
     image: postgres
     restart: always
