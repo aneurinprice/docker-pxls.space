@@ -16,17 +16,17 @@ spec:
         component: "database"
     spec:
       containers:
-      - name: "${CI_PROJECT_TITLE}-database"
-        image: "postgres:latest"
-        env:
-          - name: POSTGRES_USER
-            value: "${CI_PROJECT_TITLE}"
-          - name: POSTGRES_PASSWORD
-            value: "${CI_PROJECT_TITLE}"
-          - name: POSTGRES_DB
-            value: "${CI_PROJECT_TITLE}"
-        ports:
-          - containerPort: 5432
+        - name: "${CI_PROJECT_TITLE}-database"
+          image: "postgres:latest"
+          env:
+            - name: POSTGRES_USER
+              value: "${CI_PROJECT_TITLE}"
+            - name: POSTGRES_PASSWORD
+              value: "${CI_PROJECT_TITLE}"
+            - name: POSTGRES_DB
+              value: "${CI_PROJECT_TITLE}"
+          ports:
+            - containerPort: 5432
 ---
 apiVersion: v1
 kind: Service

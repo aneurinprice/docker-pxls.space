@@ -16,24 +16,25 @@ spec:
         component: "frontend"
     spec:
       containers:
-      - name: "${CI_PROJECT_TITLE}"
-        image: "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
-        volumeMounts:
-          - name: data
-            mountPath: /data
-        env:
-          - name: DATABASE_USER
-            value: "${CI_PROJECT_TITLE}"
-          - name: DATABASE_PASSWORD
-            value: "${CI_PROJECT_TITLE}"
-          - name: DATABASE_NAME
-            value: "${CI_PROJECT_TITLE}"
-          - name: DATABASE_HOST
-            value: "${CI_PROJECT_TITLE}-database"
-          - name: PXLS_HOST
-            value: "${CI_PROJECT_TITLE}-frontend"
-        ports:
-        - containerPort: 4567
+        - name: "${CI_PROJECT_TITLE}"
+          image: >
+            "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          env:
+            - name: DATABASE_USER
+              value: "${CI_PROJECT_TITLE}"
+            - name: DATABASE_PASSWORD
+              value: "${CI_PROJECT_TITLE}"
+            - name: DATABASE_NAME
+              value: "${CI_PROJECT_TITLE}"
+            - name: DATABASE_HOST
+              value: "${CI_PROJECT_TITLE}-database"
+            - name: PXLS_HOST
+              value: "${CI_PROJECT_TITLE}-frontend"
+          ports:
+            - containerPort: 4567
       volumes:
         - name: data
           emptyDir: {}

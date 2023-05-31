@@ -13,11 +13,7 @@ yamllint:
     name: cytopia/yamllint:latest
     entrypoint: [""]
   script:
-    - for file in $(find . -type f 
-      -name *.yaml
-      -o
-      -name *.yml); do 
-      yamllint ${file}; done
+    - yamllint .
 
 build:
   stage: build
