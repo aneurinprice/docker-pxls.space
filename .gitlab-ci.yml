@@ -17,7 +17,7 @@ yamllint:
       -name *.yaml
       -o
       -name *.yml); do 
-      yamllint; done
+      yamllint ${file}; done
 
 build:
   stage: build
