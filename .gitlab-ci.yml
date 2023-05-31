@@ -1,10 +1,23 @@
 stages:
+  - lint
   - build
   - push-dev
   - deploy
   - test
   - teardown
   - push
+
+yamllint:
+  stage: lint
+  image:
+    name: cytopia/yamllint:latest
+    entrypoint: [""]
+  script:
+    - find . -type f 
+      -name *.yaml
+      -o
+      -name *.yml |
+      yamllint
 
 build:
   stage: build
