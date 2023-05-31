@@ -65,6 +65,7 @@ deploy-database:
       - Dockerfile
       - entrypoint
       - .gitlab-ci.yml
+      - .ci-tests
   script:
     - envsubst < .ci-tests/pxls-database.yaml | kubectl apply -f -
     - kubectl wait pods  -l app="${CI_PROJECT_TITLE}",component=database --for condition=Ready --timeout=90s
@@ -83,6 +84,7 @@ deploy-frontend:
       - Dockerfile
       - entrypoint
       - .gitlab-ci.yml
+      - .ci-tests
   script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl apply -f -
     - kubectl wait pods  -l app="${CI_PROJECT_TITLE}",component=frontend --for condition=Ready --timeout=90s
@@ -97,6 +99,7 @@ test-frontend:
       - Dockerfile
       - entrypoint
       - .gitlab-ci.yml
+      - .ci-tests
   script:
     - curl ${CI_PROJECT_TITLE}-frontend:4567
 
@@ -114,6 +117,7 @@ destroy-database:
       - Dockerfile
       - entrypoint
       - .gitlab-ci.yml
+      - .ci-tests
   script:
     - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
 
@@ -131,6 +135,7 @@ destroy-frontend:
       - Dockerfile
       - entrypoint
       - .gitlab-ci.yml
+      - .ci-tests
   script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl delete -f -
 
