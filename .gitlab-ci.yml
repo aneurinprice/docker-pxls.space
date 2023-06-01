@@ -23,7 +23,7 @@ build:
   rules:
     - changes:
       - Dockerfile
-      - entrypoint.d/
+      - entrypoint.d/**
   script:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
@@ -40,8 +40,7 @@ push-dev:
   rules:
     - changes:
       - Dockerfile
-      - entrypoint
-      - .gitlab-ci.yml
+      - entrypoint.d/**
   needs:
     - build
   script:
@@ -60,9 +59,7 @@ deploy-database:
   rules:
     - changes:
       - Dockerfile
-      - entrypoint
-      - .gitlab-ci.yml
-      - .ci-tests
+      - entrypoint.d/**
   script:
     - envsubst < .ci-tests/pxls-database.yaml | kubectl apply -f -
     - kubectl wait pods  -l app="${CI_COMMIT_SHORT_SHA}",component=database --for condition=Ready --timeout=90s
@@ -79,9 +76,7 @@ deploy-frontend:
   rules:
     - changes:
       - Dockerfile
-      - entrypoint
-      - .gitlab-ci.yml
-      - .ci-tests
+      - entrypoint.d/**
   script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl apply -f -
     - kubectl wait pods  -l app="${CI_COMMIT_SHORT_SHA}",component=frontend --for condition=Ready --timeout=90s
@@ -94,9 +89,7 @@ test-frontend:
   rules:
     - changes:
       - Dockerfile
-      - entrypoint
-      - .gitlab-ci.yml
-      - .ci-tests
+      - entrypoint.d/**
   needs:
     - deploy-frontend
   script:
@@ -110,10 +103,10 @@ push-to-harbor:
     name: gcr.io/go-containerregistry/crane:debug
     entrypoint: [""]
   rules:
+  rules:
     - changes:
       - Dockerfile
-      - entrypoint
-      - .gitlab-ci.yml
+      - entrypoint.d/**
   needs:
     - build
   script:
@@ -129,8 +122,7 @@ push-to-dockerhub:
   rules:
     - changes:
       - Dockerfile
-      - entrypoint
-      - .gitlab-ci.yml
+      - entrypoint.d/**
   needs:
     - build
   script:
