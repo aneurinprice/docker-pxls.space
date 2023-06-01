@@ -23,8 +23,7 @@ build:
   rules:
     - changes:
       - Dockerfile
-      - entrypoint
-      - .gitlab-ci.yml
+      - entrypoint.d/
   script:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
