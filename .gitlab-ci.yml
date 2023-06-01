@@ -101,7 +101,7 @@ test-frontend:
   dependencies:
     - deploy-frontend
   script:
-    - curl ${CI_PROJECT_TITLE}-frontend:4567
+    - curl pxls-frontend:4567
     - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl delete -f -
 
