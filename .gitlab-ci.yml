@@ -85,7 +85,7 @@ deploy-frontend:
 test-frontend:
   stage: test
   image:
-    name: thisiskj/kubectl-envsubst
+    name: curlimages/curl
     entrypoint: [""]
   rules:
     - changes:
