@@ -2,36 +2,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "${CI_PROJECT_TITLE}-frontend"
+  name: "${CI_COMMIT_SHORT_SHA}-frontend"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "${CI_PROJECT_TITLE}"
+      app: "${CI_COMMIT_SHORT_SHA}"
       component: "frontend"
   template:
     metadata:
       labels:
-        app: "${CI_PROJECT_TITLE}"
+        app: "${CI_COMMIT_SHORT_SHA}"
         component: "frontend"
     spec:
       containers:
-        - name: "${CI_PROJECT_TITLE}"
-          image: "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
+        - name: "${CI_COMMIT_SHORT_SHA}"
+          image: "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}"
           volumeMounts:
             - name: data
               mountPath: /data
           env:
             - name: DATABASE_USER
-              value: "${CI_PROJECT_TITLE}"
+              value: "${CI_COMMIT_SHORT_SHA}"
             - name: DATABASE_PASSWORD
-              value: "${CI_PROJECT_TITLE}"
+              value: "${CI_COMMIT_SHORT_SHA}"
             - name: DATABASE_NAME
-              value: "${CI_PROJECT_TITLE}"
+              value: "${CI_COMMIT_SHORT_SHA}"
             - name: DATABASE_HOST
-              value: "${CI_PROJECT_TITLE}-database"
+              value: "${CI_COMMIT_SHORT_SHA}-database"
             - name: PXLS_HOST
-              value: "${CI_PROJECT_TITLE}-frontend"
+              value: "${CI_COMMIT_SHORT_SHA}-frontend"
           ports:
             - containerPort: 4567
       volumes:
@@ -42,10 +42,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: "${CI_PROJECT_TITLE}-frontend"
+  name: "${CI_COMMIT_SHORT_SHA}-frontend"
 spec:
   selector:
-    app: "${CI_PROJECT_TITLE}"
+    app: "${CI_COMMIT_SHORT_SHA}"
     component: "frontend"
   ports:
     - name: frontend

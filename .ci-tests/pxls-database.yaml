@@ -2,39 +2,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "${CI_PROJECT_TITLE}-database"
+  name: "${CI_COMMIT_SHORT_SHA}-database"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "${CI_PROJECT_TITLE}"
+      app: "${CI_COMMIT_SHORT_SHA}"
       component: "database"
   template:
     metadata:
       labels:
-        app: "${CI_PROJECT_TITLE}"
+        app: "${CI_COMMIT_SHORT_SHA}"
         component: "database"
     spec:
       containers:
-        - name: "${CI_PROJECT_TITLE}-database"
+        - name: "${CI_COMMIT_SHORT_SHA}-database"
           image: "postgres:latest"
           env:
             - name: POSTGRES_USER
-              value: "${CI_PROJECT_TITLE}"
+              value: "${CI_COMMIT_SHORT_SHA}"
             - name: POSTGRES_PASSWORD
-              value: "${CI_PROJECT_TITLE}"
+              value: "${CI_COMMIT_SHORT_SHA}"
             - name: POSTGRES_DB
-              value: "${CI_PROJECT_TITLE}"
+              value: "${CI_COMMIT_SHORT_SHA}"
           ports:
             - containerPort: 5432
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: "${CI_PROJECT_TITLE}-database"
+  name: "${CI_COMMIT_SHORT_SHA}-database"
 spec:
   selector:
-    app: "${CI_PROJECT_TITLE}"
+    app: "${CI_COMMIT_SHORT_SHA}"
     component: "database"
   ports:
     - name: database
