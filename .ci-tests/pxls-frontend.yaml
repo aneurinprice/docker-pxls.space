@@ -29,7 +29,7 @@ spec:
             - name: DATABASE_NAME
               value: "${CI_COMMIT_SHORT_SHA}"
             - name: DATABASE_HOST
-              value: "${CI_COMMIT_SHORT_SHA}-database"
+              value: "pxls-database"
             - name: PXLS_HOST
               value: "${CI_COMMIT_SHORT_SHA}-frontend"
           ports:
@@ -42,7 +42,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: "${CI_COMMIT_SHORT_SHA}-frontend"
+  name: "pxls-frontend"
 spec:
   selector:
     app: "${CI_COMMIT_SHORT_SHA}"

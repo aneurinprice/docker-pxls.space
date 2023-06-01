@@ -31,7 +31,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: "${CI_COMMIT_SHORT_SHA}-database"
+  name: "pxls-database"
 spec:
   selector:
     app: "${CI_COMMIT_SHORT_SHA}"
