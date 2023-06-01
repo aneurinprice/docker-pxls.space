@@ -42,7 +42,7 @@ push-dev:
       - Dockerfile
       - entrypoint
       - .gitlab-ci.yml
-  dependencies:
+  needs:
     - build
   script:
     - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -97,7 +97,7 @@ test-frontend:
       - entrypoint
       - .gitlab-ci.yml
       - .ci-tests
-  dependencies:
+  needs:
     - deploy-frontend
   script:
     - curl pxls-frontend:4567
@@ -114,7 +114,7 @@ push-to-harbor:
       - Dockerfile
       - entrypoint
       - .gitlab-ci.yml
-  dependencies:
+  needs:
     - build
   script:
     - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -131,7 +131,7 @@ push-to-dockerhub:
       - Dockerfile
       - entrypoint
       - .gitlab-ci.yml
-  dependencies:
+  needs:
     - build
   script:
     - crane auth login -u "${DOCKERHUB_USER}" -p "${DOCKERHUB_PASSWORD}" docker.io
