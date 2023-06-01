@@ -87,7 +87,7 @@ deploy-frontend:
       - .ci-tests
   script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl apply -f -
-    - kubectl wait pods  -l app="${CI_PROJECT_TITLE}",component=frontend --for condition=Ready --timeout=90s
+    - kubectl wait pods  -l app="${CI_COMMIT_SHORT_SHA}",component=frontend --for condition=Ready --timeout=90s
 
 test-frontend:
   stage: test
