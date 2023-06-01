@@ -2,7 +2,7 @@ FROM maven:3.8.3-openjdk-16 AS build
 
 RUN java -version
 RUN git clone https://github.com/pxlsspace/Pxls.git;
-WORKDIR Pxls; \
+WORKDIR ./Pxls
 RUN mvn clean package; \
 mkdir /tmp/pxls; \
 cp target/pxls*.jar /tmp/pxls/pxls.jar; \
