@@ -3,6 +3,7 @@ stages:
   - build
   - push-dev
   - test
+  - teardown
   - push
 
 yamllint:
@@ -94,8 +95,34 @@ test-frontend:
     - deploy-frontend
   script:
     - curl pxls-frontend:4567
-    - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
+
+teardown-frontend:
+  stage: teardown
+  image:
+    name: thisiskj/kubectl-envsubst
+    entrypoint: [""]
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint.d/**
+  needs:
+    - deploy-frontend
+  script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl delete -f -
+
+teardown-database:
+  stage: teardown
+  image:
+    name: thisiskj/kubectl-envsubst
+    entrypoint: [""]
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint.d/**
+  needs:
+    - deploy-frontend
+  script:
+    - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
 
 push-to-harbor:
   stage: push 
