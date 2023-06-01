@@ -2,7 +2,6 @@ stages:
   - lint
   - build
   - push-dev
-  - deploy
   - test
   - push
 
@@ -51,7 +50,7 @@ push-dev:
     - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
 
 deploy-database:
-  stage: deploy
+  stage: test
   tags:
     - privileged
   image:
@@ -68,10 +67,9 @@ deploy-database:
   script:
     - envsubst < .ci-tests/pxls-database.yaml | kubectl apply -f -
     - kubectl wait pods  -l app="${CI_COMMIT_SHORT_SHA}",component=database --for condition=Ready --timeout=90s
-    - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
 
 deploy-frontend:
-  stage: deploy
+  stage: test
   tags:
     - privileged
   image:
@@ -88,7 +86,6 @@ deploy-frontend:
   script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl apply -f -
     - kubectl wait pods  -l app="${CI_COMMIT_SHORT_SHA}",component=frontend --for condition=Ready --timeout=90s
-    - envsubst < .ci-tests/pxls-frontend.yaml | kubectl delete -f -
 
 test-frontend:
   stage: test
@@ -101,8 +98,12 @@ test-frontend:
       - entrypoint
       - .gitlab-ci.yml
       - .ci-tests
+  dependencies:
+    - deploy-frontend
   script:
     - curl ${CI_PROJECT_TITLE}-frontend:4567
+    - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
+    - envsubst < .ci-tests/pxls-frontend.yaml | kubectl delete -f -
 
 push-to-harbor:
   stage: push 
