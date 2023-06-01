@@ -98,6 +98,8 @@ test-frontend:
 
 teardown-frontend:
   stage: teardown
+  tags:
+    - privileged
   image:
     name: thisiskj/kubectl-envsubst
     entrypoint: [""]
@@ -114,6 +116,8 @@ teardown-frontend:
 
 teardown-database:
   stage: teardown
+  tags:
+    - privileged
   image:
     name: thisiskj/kubectl-envsubst
     entrypoint: [""]
