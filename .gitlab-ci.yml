@@ -109,6 +109,7 @@ push-to-harbor:
       - entrypoint.d/**
   needs:
     - build
+    - test-frontend
   script:
     - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
@@ -125,6 +126,7 @@ push-to-dockerhub:
       - entrypoint.d/**
   needs:
     - build
+    - test-frontend
   script:
     - crane auth login -u "${DOCKERHUB_USER}" -p "${DOCKERHUB_PASSWORD}" docker.io
     - crane push "${CI_PROJECT_TITLE}.tar" "${DOCKERHUB_USER}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
