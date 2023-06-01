@@ -4,7 +4,6 @@ stages:
   - push-dev
   - deploy
   - test
-  - teardown
   - push
 
 yamllint:
@@ -68,7 +67,8 @@ deploy-database:
       - .ci-tests
   script:
     - envsubst < .ci-tests/pxls-database.yaml | kubectl apply -f -
-    - kubectl wait pods  -l app="${CI_PROJECT_TITLE}",component=database --for condition=Ready --timeout=90s
+    - kubectl wait pods  -l app="${CI_COMMIT_SHORT_SHA}",component=database --for condition=Ready --timeout=90s
+    - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
 
 deploy-frontend:
   stage: deploy
@@ -88,6 +88,7 @@ deploy-frontend:
   script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl apply -f -
     - kubectl wait pods  -l app="${CI_COMMIT_SHORT_SHA}",component=frontend --for condition=Ready --timeout=90s
+    - envsubst < .ci-tests/pxls-frontend.yaml | kubectl delete -f -
 
 test-frontend:
   stage: test
@@ -102,42 +103,6 @@ test-frontend:
       - .ci-tests
   script:
     - curl ${CI_PROJECT_TITLE}-frontend:4567
-
-destroy-database:
-  stage: teardown
-  tags:
-    - privileged
-  image:
-    name: thisiskj/kubectl-envsubst
-    entrypoint: [""]
-  variables:
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-privileged
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint
-      - .gitlab-ci.yml
-      - .ci-tests
-  script:
-    - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
-
-destroy-frontend:
-  stage: teardown
-  tags:
-    - privileged
-  image:
-    name: thisiskj/kubectl-envsubst
-    entrypoint: [""]
-  variables:
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-privileged
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint
-      - .gitlab-ci.yml
-      - .ci-tests
-  script:
-    - envsubst < .ci-tests/pxls-frontend.yaml | kubectl delete -f -
 
 push-to-harbor:
   stage: push 
