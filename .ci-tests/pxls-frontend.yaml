@@ -7,12 +7,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "${CI_COMMIT_SHORT_SHA}"
+      app: "pxls"
       component: "frontend"
   template:
     metadata:
       labels:
-        app: "${CI_COMMIT_SHORT_SHA}"
+        app: "pxls"
         component: "frontend"
     spec:
       containers:
@@ -45,7 +45,7 @@ metadata:
   name: "pxls-frontend"
 spec:
   selector:
-    app: "${CI_COMMIT_SHORT_SHA}"
+    app: "pxls"
     component: "frontend"
   ports:
     - name: frontend

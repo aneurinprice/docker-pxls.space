@@ -7,12 +7,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "${CI_COMMIT_SHORT_SHA}"
+      app: "pxls"
       component: "database"
   template:
     metadata:
       labels:
-        app: "${CI_COMMIT_SHORT_SHA}"
+        app: "pxls"
         component: "database"
     spec:
       containers:
@@ -34,7 +34,7 @@ metadata:
   name: "pxls-database"
 spec:
   selector:
-    app: "${CI_COMMIT_SHORT_SHA}"
+    app: "pxls"
     component: "database"
   ports:
     - name: database
