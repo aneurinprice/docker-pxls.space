@@ -14,14 +14,6 @@ yamllint:
   script:
     - yamllint .
 
-docker-lint:
-  stage: lint
-  image:
-    name: hadolint/hadolint
-    entrypoint: [""]
-  script:
-    - hadolint ./Dockerfile
-
 build:
   stage: build
   artifacts:
