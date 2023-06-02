@@ -164,5 +164,5 @@ push-to-dockerhub:
     - test-frontend
   script:
     - crane auth login -u "${DOCKERHUB_USER}" -p "${DOCKERHUB_PASSWORD}" docker.io
-    - crane push "${CI_PROJECT_TITLE}.tar" "${DOCKERHUB_USER}/${CI_PROJECT_TITLE}:{CI_COMMIT_SHORT_SHA}"
+    - crane push "${CI_PROJECT_TITLE}.tar" "${DOCKERHUB_USER}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
     - crane push "${CI_PROJECT_TITLE}.tar" "${DOCKERHUB_USER}/${CI_PROJECT_TITLE}:latest"
