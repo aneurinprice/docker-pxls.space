@@ -63,7 +63,7 @@ deploy-database:
       - entrypoint.d/**
   script:
     - envsubst < .ci-tests/pxls-database.yaml | kubectl apply -f -
-    - kubectl wait pods  -l app="${CI_COMMIT_SHORT_SHA}",component=database --for condition=Ready --timeout=90s
+    - kubectl wait pods  -l app="pxls",component=database --for condition=Ready --timeout=90s
 
 deploy-frontend:
   stage: test
@@ -80,7 +80,7 @@ deploy-frontend:
       - entrypoint.d/**
   script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl apply -f -
-    - kubectl wait pods  -l app="${CI_COMMIT_SHORT_SHA}",component=frontend --for condition=Ready --timeout=90s
+    - kubectl wait pods  -l app="pxls",component=frontend --for condition=Ready --timeout=90s
 
 test-frontend:
   stage: test
