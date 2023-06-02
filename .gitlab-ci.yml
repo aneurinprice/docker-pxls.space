@@ -111,6 +111,7 @@ teardown-frontend:
       - entrypoint.d/**
   needs:
     - deploy-frontend
+    - test-frontend
   script:
     - envsubst < .ci-tests/pxls-frontend.yaml | kubectl delete -f -
 
@@ -129,6 +130,8 @@ teardown-database:
       - entrypoint.d/**
   needs:
     - deploy-frontend
+    - test-frontend
+  script:
   script:
     - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
 
