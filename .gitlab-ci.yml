@@ -46,7 +46,7 @@ push-dev:
     - build
   script:
     - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
+    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/library/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
 
 deploy-database:
   stage: test
@@ -150,8 +150,8 @@ push-to-harbor:
     - test-frontend
   script:
     - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
-    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/${CI_PROJECT_TITLE}/${CI_PROJECT_TITLE}:latest"
+    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/library/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
+    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/library/${CI_PROJECT_TITLE}:latest"
 
 push-to-dockerhub:
   stage: push 
