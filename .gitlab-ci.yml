@@ -51,6 +51,11 @@ test-frontend:
   image:
     name: curlimages/curl
     entrypoint: [""]
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint.d/**
+      - docker-compose.yml
   tags:
     - docker-priv
   needs:
@@ -62,6 +67,11 @@ teardown-compose:
   stage: teardown
   image: 
     name: docker:dind
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint.d/**
+      - docker-compose.yml
   tags:
     - docker-priv
   needs:
