@@ -2,7 +2,9 @@
 version: "3.9"
 services:
   pxls-frontend:
-    image: m08y/docker-pxls-space:latest
+    build:
+      dockerfile: Dockerfile
+      context: .
     restart: always
     ports:
       - "4567:4567"

@@ -1,7 +1,6 @@
 stages:
   - lint
   - build
-  - push-dev
   - test
   - teardown
   - push
@@ -33,107 +32,35 @@ build:
       --destination tar
       --tar-path "${CI_PROJECT_TITLE}.tar"
 
-push-dev:
-  stage: push-dev
-  image:
-    name: gcr.io/go-containerregistry/crane:debug
-    entrypoint: [""]
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
-  needs:
-    - build
-  script:
-    - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/library/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
-
-deploy-database:
-  stage: test
+build-compose:
+  stage: build
+  image: 
+    name: docker:dind
   tags:
-    - privileged
-  image:
-    name: thisiskj/kubectl-envsubst
-    entrypoint: [""]
-  variables:
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-privileged
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
+    - docker-priv
   script:
-    - envsubst < .ci-tests/pxls-database.yaml | kubectl apply -f -
-    - kubectl wait pods  -l app="pxls",component=database --for condition=Ready --timeout=90s
-
-deploy-frontend:
-  stage: test
-  tags:
-    - privileged
-  image:
-    name: thisiskj/kubectl-envsubst
-    entrypoint: [""]
-  variables:
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-privileged
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
-  script:
-    - envsubst < .ci-tests/pxls-frontend.yaml | kubectl apply -f -
-    - kubectl wait pods  -l app="pxls",component=frontend --for condition=Ready --timeout=90s
+    - docker-compose up -d
 
 test-frontend:
   stage: test
   image:
     name: curlimages/curl
     entrypoint: [""]
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
-  needs:
-    - deploy-frontend
-  script:
-    - curl pxls-frontend:4567
-
-teardown-frontend:
-  stage: teardown
   tags:
-    - privileged
-  image:
-    name: thisiskj/kubectl-envsubst
-    entrypoint: [""]
-  variables:
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-privileged
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
+    - docker-priv
   needs:
-    - deploy-frontend
-    - test-frontend
+    - build-compose
   script:
-    - envsubst < .ci-tests/pxls-frontend.yaml | kubectl delete -f -
+    - curl localhost:4567
 
-teardown-database:
+teardown-compose:
   stage: teardown
+  image: 
+    name: docker:dind
   tags:
-    - privileged
-  image:
-    name: thisiskj/kubectl-envsubst
-    entrypoint: [""]
-  variables:
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: gitlab-runner-privileged
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
-  needs:
-    - deploy-frontend
-    - test-frontend
+    - docker-priv
   script:
-  script:
-    - envsubst < .ci-tests/pxls-database.yaml | kubectl delete -f -
+    - docker-compose down
 
 push-to-harbor:
   stage: push 
