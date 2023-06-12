@@ -36,6 +36,11 @@ build-compose:
   stage: build
   image: 
     name: docker:dind
+  rules:
+    - changes:
+      - Dockerfile
+      - entrypoint.d/**
+      - docker-compose.yml
   tags:
     - docker-priv
   script:
@@ -51,7 +56,7 @@ test-frontend:
   needs:
     - build-compose
   script:
-    - curl localhost:4567
+    - curl http://host.docker.internal:4567
 
 teardown-compose:
   stage: teardown
@@ -59,6 +64,8 @@ teardown-compose:
     name: docker:dind
   tags:
     - docker-priv
+  needs:
+    - build-compose
   script:
     - docker-compose down
 
