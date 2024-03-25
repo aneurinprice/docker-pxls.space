@@ -1,115 +1,35 @@
 stages:
-  - lint
   - build
-  - test
-  - teardown
   - push
-
-yamllint:
-  stage: lint
-  image:
-    name: cytopia/yamllint:latest
-    entrypoint: [""]
-  script:
-    - yamllint .
 
 build:
   stage: build
-  artifacts:
-    untracked: true
   image:
-    name: gcr.io/kaniko-project/executor:v1.10.0-debug
+    name: gcr.io/kaniko-project/executor:v1.14.0-debug
     entrypoint: [""]
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
   script:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --no-push
-      --destination tar
-      --tar-path "${CI_PROJECT_TITLE}.tar"
-
-build-compose:
-  stage: build
-  image: 
-    name: docker:dind
+      --destination=image
+      --tar-path="${CI_PROJECT_NAME}:${CI_COMMIT_TAG}.tar"
+  artifacts:
+    paths:
+      - "${CI_PROJECT_DIR}/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}.tar"
   rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
-      - docker-compose.yml
-  tags:
-    - docker-priv
-  script:
-    - docker-compose up -d
+    - if: $CI_COMMIT_TAG
 
-test-frontend:
-  stage: test
-  image:
-    name: curlimages/curl
-    entrypoint: [""]
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
-      - docker-compose.yml
-  tags:
-    - docker-priv
-  needs:
-    - build-compose
-  script:
-    - curl http://host.docker.internal:4567
-
-teardown-compose:
-  stage: teardown
-  image: 
-    name: docker:dind
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
-      - docker-compose.yml
-  tags:
-    - docker-priv
-  needs:
-    - build-compose
-  script:
-    - docker-compose down
-
-push-to-harbor:
-  stage: push 
+push:
+  stage: push
   image:
     name: gcr.io/go-containerregistry/crane:debug
     entrypoint: [""]
+  script: 
+    - crane auth login ${HARBOR_HOST}
+      --username ${HARBOR_USERNAME}
+      --password ${HARBOR_PASSWORD}
+    - crane push "${CI_PROJECT_DIR}/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}.tar" "${HARBOR_HOST}/${HARBOR_PROJECT}/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}"
   rules:
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
-  needs:
-    - build
-    - test-frontend
-  script:
-    - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/library/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
-    - crane push "${CI_PROJECT_TITLE}.tar" "${CI_REGISTRY}/library/${CI_PROJECT_TITLE}:latest"
-
-push-to-dockerhub:
-  stage: push 
-  image:
-    name: gcr.io/go-containerregistry/crane:debug
-    entrypoint: [""]
-  rules:
-    - changes:
-      - Dockerfile
-      - entrypoint.d/**
-  needs:
-    - build
-    - test-frontend
-  script:
-    - crane auth login -u "${DOCKERHUB_USER}" -p "${DOCKERHUB_PASSWORD}" docker.io
-    - crane push "${CI_PROJECT_TITLE}.tar" "${DOCKERHUB_USER}/${CI_PROJECT_TITLE}:${CI_COMMIT_SHORT_SHA}"
-    - crane push "${CI_PROJECT_TITLE}.tar" "${DOCKERHUB_USER}/${CI_PROJECT_TITLE}:latest"
+    - if: $CI_COMMIT_TAG
+  
