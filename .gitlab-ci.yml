@@ -1,7 +1,7 @@
 stages:
   - build
-  - test
   - push
+  - test
 
 build:
   stage: build
@@ -37,7 +37,7 @@ push:
 test:
   stage: test
   image:
-    name: registry.gitlab.com/gitlab-org/cluster-integration/helm-install-image:3.14.3-kube-1.29.3-alpine-3.19
+    name: registry.gitlab.com/gitlab-org/cluster-integration/helm-install-image:latest
     entrypoint: [""]
   script: 
     - helm install --generate-name --set image.repository=${HARBOR_HOST}/${HARBOR_PROJECT}/${CI_PROJECT_NAME} --set image.tag=${CI_COMMIT_TAG} charts/pxls-space
