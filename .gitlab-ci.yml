@@ -37,7 +37,7 @@ push:
 test:
   stage: test
   image:
-    name: alpine/helm:3.2.1 
+    name: 3.9.4 
     entrypoint: [""]
   script: 
     - helm install --generate-name --set image.repository=${HARBOR_HOST}/${HARBOR_PROJECT}/${CI_PROJECT_NAME} --set image.tag=${CI_COMMIT_SHORT_SHA} charts/pxls-space
