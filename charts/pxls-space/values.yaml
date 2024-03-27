@@ -1,0 +1,74 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: false
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 4567
+
+ingress:
+  enabled: false
+
+resources: {}
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+autoscaling:
+  enabled: false
+
+# Additional volumes on the output Deployment definition.
+volumes:
+  - name: pxls-data
+    emptyDir:
+      sizeLimit: 500Mi
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts:
+  - name: pxls-data
+    mountPath: /data
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+postgresql:
+  fullNameOverride: "pxls-database"
+  auth:
+    username: "pxls"
+    password: "randomstring"
+    database: "pxls"
+  primary:
+    persistence:
+      enabled: true
+      storageClass: "local-path"
+  slave:
+    persistence:
+      enabled: false
+  volumePermissions:
+    enabled: true

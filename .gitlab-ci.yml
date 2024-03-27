@@ -1,6 +1,7 @@
 stages:
   - build
   - push
+  - test
 
 build:
   stage: build
@@ -32,4 +33,13 @@ push:
     - crane push "${CI_PROJECT_DIR}/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}.tar" "${HARBOR_HOST}/${HARBOR_PROJECT}/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}"
   rules:
     - if: $CI_COMMIT_TAG
-  
+
+test:
+  stage: push
+  image:
+    name: registry.gitlab.com/gitlab-org/cluster-integration/helm-install-image:3.14.3-kube-1.29.3-alpine-3.19
+    entrypoint: [""]
+  script: 
+    - helm install --generate-name --set image.repository=${HARBOR_HOST}/${HARBOR_PROJECT}/${CI_PROJECT_NAME} --set image.tag=${CI_COMMIT_TAG} charts/pxls-space
+  rules:
+    - if: $CI_COMMIT_TAG
