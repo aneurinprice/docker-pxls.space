@@ -1,7 +1,7 @@
 stages:
   - build
-  - push
   - test
+  - push
 
 build:
   stage: build
@@ -35,7 +35,7 @@ push:
     - if: $CI_COMMIT_TAG
 
 test:
-  stage: push
+  stage: test
   image:
     name: registry.gitlab.com/gitlab-org/cluster-integration/helm-install-image:3.14.3-kube-1.29.3-alpine-3.19
     entrypoint: [""]
