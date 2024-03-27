@@ -37,7 +37,7 @@ push:
 test:
   stage: test
   image:
-    name: registry.gitlab.com/gitlab-org/cluster-integration/helm-install-image:latest
+    name: alpine/helm:3.2.1 
     entrypoint: [""]
   script: 
     - helm install --generate-name --set image.repository=${HARBOR_HOST}/${HARBOR_PROJECT}/${CI_PROJECT_NAME} --set image.tag=${CI_COMMIT_TAG} charts/pxls-space
