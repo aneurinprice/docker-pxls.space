@@ -43,7 +43,7 @@ push-to-dockerhub:
       --username ${dockerhub_username}
       --password ${dockerhub_password}
     - crane push "${CI_PROJECT_DIR}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}.tar" "${dockerhub_username}/docker-pxls.space:${CI_COMMIT_SHORT_SHA}"
-    - crane push "${CI_PROJECT_DIR}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}.tar" "${dockerhub_username}/docker-pxls.space:latest"
+    - crane push "${CI_PROJECT_DIR}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}.tar" "${dockerhub_url}/${dockerhub_username}/docker-pxls.space:latest"
 
   rules:
     - if: $CI_COMMIT_SHORT_SHA
