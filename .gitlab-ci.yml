@@ -20,7 +20,7 @@ build:
   rules:
     - if: $CI_COMMIT_SHORT_SHA
 
-push:
+push-to-harbor:
   stage: push
   image:
     name: gcr.io/go-containerregistry/crane:debug
@@ -30,5 +30,20 @@ push:
       --username ${HARBOR_USERNAME}
       --password ${HARBOR_PASSWORD}
     - crane push "${CI_PROJECT_DIR}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}.tar" "${HARBOR_HOST}/${HARBOR_PROJECT}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}"
+  rules:
+    - if: $CI_COMMIT_SHORT_SHA
+
+push-to-dockerhub:
+  stage: push
+  image:
+    name: gcr.io/go-containerregistry/crane:debug
+    entrypoint: [""]
+  script: 
+    - crane auth login ${dockerhub_url}
+      --username ${dockerhub_username}
+      --password ${dockerhub_password}
+    - crane push "${CI_PROJECT_DIR}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}.tar" "${dockerhub_username}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}"
+    - crane push "${CI_PROJECT_DIR}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}.tar" "${dockerhub_username}/${CI_PROJECT_NAME}:latest"
+
   rules:
     - if: $CI_COMMIT_SHORT_SHA
