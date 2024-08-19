@@ -3,11 +3,13 @@ FROM maven:3.8.3-openjdk-16 AS build
 
 RUN java -version
 WORKDIR ./Pxls
-RUN git clone https://github.com/pxlsspace/Pxls.git .;
+RUN git clone https://github.com/Mubelotix/Pxls.git .;
 RUN mvn clean package; \
     mkdir /tmp/pxls; \
     cp target/pxls*.jar /tmp/pxls/pxls.jar; \
     cp -r resources/* /tmp/pxls
+
+COPY pxls.conf /tmp/pxls/pxls.conf
 
 FROM adoptopenjdk/openjdk16:jdk-16.0.1_9-alpine
 LABEL maintainer="Aneurin Price adp@nyeprice.space"

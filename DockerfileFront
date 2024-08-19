@@ -1,0 +1,22 @@
+# Use an official Node.js runtime as a parent image
+FROM node:18-alpine
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Clone the repository
+RUN apk add --no-cache git && \
+    git clone https://github.com/pxlsspace/pxls-web.git . && \
+    npm install
+
+# Put config in config.json5
+RUN echo "{port: 3000,proxyTo: 'pxls-backend:4567',title: 'pxls.space'}" > config.json5
+
+# Build the application
+RUN npm run build
+
+# Expose the port that the app runs on
+EXPOSE 3000
+
+# Start the application
+CMD ["npm", "start"]
