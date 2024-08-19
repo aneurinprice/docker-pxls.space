@@ -16,6 +16,7 @@ services:
       PXLS_HOST: "localhost"
     volumes:
       - pxls-datastore:/data
+      - ./pxls.conf:/data/pxls.conf
   
   pxls-frontend:
     build:
