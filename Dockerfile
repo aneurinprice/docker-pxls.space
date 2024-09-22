@@ -3,7 +3,7 @@ FROM maven:3.8.3-openjdk-16 AS build
 
 RUN java -version
 WORKDIR ./Pxls
-RUN git clone https://github.com/Mubelotix/Pxls.git .;
+RUN git clone https://github.com/pxlsspace/Pxls.git .;
 
 RUN mvn clean package; \
     mkdir /tmp/pxls; \
