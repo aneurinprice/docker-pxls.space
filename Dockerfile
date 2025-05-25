@@ -10,6 +10,7 @@ RUN mvn clean package; \
     cp -r resources/* /tmp/pxls
 
 FROM adoptopenjdk/openjdk16:jdk-16.0.1_9-alpine
+RUN apk add curl
 LABEL maintainer="Aneurin Price adp@nyeprice.space"
 COPY --from=build /tmp/pxls /tmp/
 COPY entrypoint.d/ /entrypoint.d
