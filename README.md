@@ -1,3 +1,5 @@
+
+
 # DOCKER-PXLS.SPACE
 
 [Dockerhub](https://hub.docker.com/r/m08y/docker-pxls.space)
@@ -12,6 +14,8 @@ This is a docker container for running [pxls.space](https://github.com/pxlsspace
 ```
 docker-compose up
 ```
+
+Once the containers are up, you can access the application at `http://localhost:3009`.
 
 ## Gotchas
 
